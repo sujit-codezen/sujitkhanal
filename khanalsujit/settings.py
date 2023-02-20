@@ -89,7 +89,7 @@ WSGI_APPLICATION = 'khanalsujit.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': "django.db.backends.postgresql",
-        'HOST': "db.zibiopbvakwuluxxvlcz.supabase.co",
+        'HOST': "db.hiyfhiztvenxjjlrvctb.supabase.co",
         'NAME': "postgres",
         'USER': "postgres",
         'PASSWORD': "Khanalsujit@1214",
