@@ -1,0 +1,106 @@
+{% extends 'base/base.html' %}
+{% block content %}
+<script>
+    document.addEventListener(
+    "click",
+    function(event) {
+        var target = event.target;
+        var replyForm;
+        if (target.matches("[data-toggle='reply-form']")) {
+            replyForm = document.getElementById(target.getAttribute("data-target"));
+            replyForm.classList.toggle("d-none");
+        }
+    },
+    false
+);
+</script>
+<section class="get-started">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8">
+                <!-- Post content-->
+                <article>
+                    <br>
+                    <!-- Post header-->
+                    <header class="mb-4">
+                        <!-- Post title-->
+                        <h1 class="fw-bolder mb-1">{{project.project_name}}</h1>
+                        <!-- Post meta content-->
+                        <div class="text-muted fst-italic mb-2">Posted on {{project.created}}</div>
+                        <!-- Post categories-->
+                        {% for tag in project.language_used.all %}
+                            <a class="badge bg-secondary text-decoration-none link-light" href="#">{{tag}}</a>
+                        {% endfor %}
+                    </header>
+                    <!-- Preview image figure-->
+                    {% for image in images %}
+                        <figure class="mb-4"><img class="img-fluid rounded" src="{{image.image.url}}" alt="{{project.project_name}}" style="height:400px; width: 100%;" ></figure>
+                    {% endfor %}
+                    <!-- Post content-->
+                    <section class="mb-5">
+                        <p>
+                            {{project.project_description}}
+                        </p>
+                    </section>
+                </article>
+                <!-- Comments section-->
+                <section class="mb-5">
+                    <div class="card bg-light">
+                        <div class="card-body">
+                            <!-- Comment form-->
+                            <form class="mb-4">
+                                <textarea class="form-control" rows="3" placeholder="Join the discussion and leave a comment!"></textarea>
+                                <button>Comment</button>
+                            </form>
+                            <!-- Comment with nested comments-->
+                            <div class="d-flex mb-4">
+                                <!-- Parent comment-->
+                                <div class="flex-shrink-0"><img class="rounded-circle" src="https://dummyimage.com/50x50/ced4da/6c757d.jpg" alt="..."></div>
+                                <div class="ms-3">
+                                    <div>
+                                        <div class="fw-bold">Commenter Name</div>
+                                        <p>If you're going to lead a space frontier, it has to be government; it'll never be private enterprise. Because the space frontier is dangerous, and it's expensive, and it has unquantified risks.</p>
+                                        <button type="button" data-toggle="reply-form" data-target="comment-1-reply-form">Reply</button>
+                                        <form method="POST" class="reply-form d-none" id="comment-1-reply-form">
+                                            <textarea placeholder="Reply to comment" rows="4"></textarea><br>
+                                            <button type="submit">Submit</button>
+                                            <button type="button" data-toggle="reply-form" data-target="comment-1-reply-form">Cancel</button>
+                                        </form>
+                                    </div>
+                                    
+                                    <!-- Child comment 1-->
+                                    <div class="d-flex mt-4">
+                                        <div class="flex-shrink-0"><img class="rounded-circle" src="https://dummyimage.com/50x50/ced4da/6c757d.jpg" alt="..."></div>
+                                        <div class="ms-3">
+                                            <div class="fw-bold">Commenter Name</div>
+                                            And under those conditions, you cannot establish a capital-market evaluation of that enterprise. You can't get investors.
+                                        </div>
+                                    </div>
+                                    <!-- Child comment 2-->
+                                    <div class="d-flex mt-4">
+                                        <div class="flex-shrink-0"><img class="rounded-circle" src="https://dummyimage.com/50x50/ced4da/6c757d.jpg" alt="..."></div>
+                                        <div class="ms-3">
+                                            <div class="fw-bold">Commenter Name</div>
+                                            When you put money directly to a problem, it makes a good headline.
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Single comment-->
+                            <div class="d-flex">
+                                <div class="flex-shrink-0"><img class="rounded-circle" src="https://dummyimage.com/50x50/ced4da/6c757d.jpg" alt="..."></div>
+                                <div class="ms-3">
+                                    <div class="fw-bold">Commenter Name</div>
+                                    When I look at the universe and all the ways the universe wants to kill us, I find it hard to reconcile that with statements of beneficence.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+            <!-- Side widgets-->
+            {% include 'projects/sidebar.html' %}
+        </div>
+    </div>
+</section>
+{% endblock %}

@@ -1,0 +1,50 @@
+{% extends 'base/base.html' %}
+{% block content %}
+<section id="product" class="get-started">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 mt-4">
+                <div class="row text-center">
+                    <h1 class="display-6 fw-bold text-capitalize">Products</h1>
+                    <div class="heading-line"></div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                {% include 'projects/search_project_form.html' %}
+            </div>
+        </div>
+      <div class="">
+        <div class="row">
+          {% for project in projects %}
+          <div class="col-xs-6 col-sm-6 col-md-6 col-lg-3">
+            <a href="/project/detail/{{project.id}}/">
+            <div class="card h-100">
+              <div class="badge bg-danger text-white position-absolute mt-1 ms-1">{{project.project_type}}</div>
+              <img class="card-img-top" src="{{project.image.url}}" alt="{{project.project_name}}">
+              <div class="card-body text-center">
+                <a href="/project/detail/{{project.id}}/" class="h4 text-danger text-decoration-none">{{project.project_name}}</a>
+  
+                <div class="product-price">
+                  <span class="price fw-bold ms-2">{% for tag in project.language_used.all %} <span class="badge bg-primary">{{tag}}</span> {% endfor %}</span>
+                </div>
+                <div class="product-price">
+                  <span class="price fw-bold ms-2">
+                    {% if project.github_url %}<a href="{{project.github_url}}" class="text-dark" target="_blank"><i class="fab fa-github"></i></a>{% endif %} 
+                    {% if project.youtube_url %}<a href="{{project.youtube_url}}" class="text-dark" target="_blank"><i class="fab fa-youtube"></i></a>{% endif %} 
+                    {% if project.project_url  %}<a href="{{project.project_url}}" class="text-dark" target="_blank"><i class="fas fa-globe"></i></a>{% endif %}
+                  </span>
+                </div>
+              </div>
+  
+            </div>
+        </a>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  
+  
+    </div>
+  </section>
+{% endblock %}
