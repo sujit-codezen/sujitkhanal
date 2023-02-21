@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-iqmmk*gpkpf&l3gkyf+=xv&4fh3r&c6uxfmoqmq#v-m*h$bqj#
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['.vercel.app', '.now.sh','www.khanalsujit.com.np']
+ALLOWED_HOSTS = ['.vercel.app', '.now.sh','www.khanalsujit.com.np', '*']
 
 
 # Application definition
@@ -37,10 +37,16 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    #app
     'portfolio',
     'contact',
     'taggit',
-    'projects'
+    'projects',
+    #third pary app
+    'cloudinary_storage',
+    'cloudinary',
+    'ckeditor',
+    
 ]
 
 MIDDLEWARE = [
@@ -131,6 +137,12 @@ USE_L10N = True
 USE_TZ = True
 
 
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME': 'dephu5drb',
+    'API_KEY': '999151732372949',
+    'API_SECRET': '4dD9PxZ1LcsclyOPjkCLKYpqXTY'
+}
+
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 STATIC_URL = '/static/'
@@ -140,6 +152,17 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles', 'static')
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media_serve')
 MEDIA_URL = '/media/'
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+
+
+CKEDITOR_UPLOAD_PATH = "projects/description/"
+CKEDITOR_CONFIGS = {
+    'default': {
+        'toolbar': 'full',
+        'height': 400,
+        'width': 1000,
+    },
+}
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field

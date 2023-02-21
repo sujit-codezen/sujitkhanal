@@ -1,6 +1,7 @@
 from django.db import models
 from taggit.managers import TaggableManager
 from core.utils import TimeStampedModel
+from ckeditor.fields import RichTextField
 
 # Create your models here.
 class Project(TimeStampedModel):
@@ -12,7 +13,7 @@ class Project(TimeStampedModel):
         ("Terminal Code", "Terminal Code"),
     )
     project_name = models.CharField(max_length=50)
-    project_description = models.CharField(max_length=100)
+    project_description = RichTextField()
     project_type = models.CharField(
         max_length = 20,
         choices = PROJECT_TYPE_CHOICES,

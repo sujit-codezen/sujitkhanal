@@ -21,13 +21,13 @@
         <div class="card-header">Project Link</div>
         <div class="card-body">
             {% if project.video_url %}
-                <p>Youtube Demo: {{project.video_url}}</p>
+                <p>Youtube Demo: <small><a href="{{project.video_url}}" target="_blank">{{project.video_url}}</a></small></p>
             {% endif %}
-            {% if project.video_url %}
-                <p>Web Demo: {{project.project_url}}</p>
+            {% if project.project_url %}
+                <p>Web Demo: <small><a href="{{project.project_url}}" target="_blank">{{project.project_url}}</a></small></p>
             {% endif %}
-            {% if project.video_url %}
-                <p>Github: {{project.github_url}}</p>
+            {% if project.github_url %}
+                <p>Github: <small><a href="{{project.github_url}}" target="_blank">{{project.github_url}}</a></small></p>
             {% endif %}
         </div>
     </div>

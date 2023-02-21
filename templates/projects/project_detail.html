@@ -17,11 +17,11 @@
                         <div class="text-muted fst-italic mb-2">Posted on {{project.created}}</div>
                     </header>
                     <!-- Preview image figure-->
-                    <figure class="mb-4"><img class="img-fluid rounded" src="{{project.image.url}}" alt="{{project.project_name}}" style="height:400px; width: 100%;" ></figure>
+                    <figure class="mb-4"><img class="img-fluid rounded" src="{{project.image.url}}" alt="{{project.project_name}}" style="height:500px; width: 100%;" ></figure>
                     <!-- Post content-->
                     <section class="mb-5">
                         <p>
-                            {{project.project_description}}
+                            {{project.project_description | safe}}
                         </p>
                     </section>
                 </article>
