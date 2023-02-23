@@ -1,0 +1,144 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% block content %}
+<script type="text/javascript" src="{% static 'ckeditor/ckeditor-init.js' %}"></script>
+<script type="text/javascript" src="{% static 'ckeditor/ckeditor/ckeditor.js' %}"></script>
+<section id="contact" class="get-started">
+    <div class="container mt-3">
+      <div class="row text-center">
+        <h1 class="display-6 fw-bold text-capitalize">Request For Assignment</h1>
+        <div class="heading-line"></div>
+      </div>
+      <div class="row text-white">
+        <div class="col-12 col-lg-6 bg-white shadow p-3">
+          <div class="form w-100 pb-2">
+            <h4 class="display-3--title mb-3">Fill the form</h4>
+            <form method="post" action="" class="row" enctype="multipart/form-data">
+              {% csrf_token %}
+              <div class="col-lg-6 col-md mb-3">
+                <label class="text-dark"><b>{{form.name.label}}</b></label>
+                  {{form.name}}
+                  {% if form.errors %}
+                    <small class="text-danger">
+                        {{ form.name.errors }}
+                    </small>
+                  {% else %}
+                    <small class="text-dark">{{form.name.help_text}}</small>
+                  {% endif %}
+              </div>
+              <div class="col-lg-6 col-md mb-3">
+                <label class="text-dark"><b>{{form.email.label}}</b></label>
+                  {{form.email}}
+                  {% if form.errors %}
+                    <small class="text-danger">
+                        {{ form.email.errors }}
+                    </small>
+                  {% else %}
+                    <small class="text-dark">{{form.email.help_text}}</small>
+                  {% endif %}
+              </div>
+
+              <div class="col-lg-6 col-md mb-3">
+                <label class="text-dark"><b>{{form.assignment_title.label}}</b></label>
+                  {{form.assignment_title}}
+                  {% if form.errors %}
+                    <small class="text-danger">
+                        {{ form.assignment_title.errors }}
+                    </small>
+                  {% else %}
+                    <small class="text-dark">{{form.assignment_title.help_text}}</small>
+                  {% endif %}
+              </div>
+
+              <div class="col-lg-6 col-md mb-3">
+                <label class="text-dark"><b>{{form.assignment_priority.label}}</b></label>
+                  {{form.assignment_priority}}
+                  {% if form.errors %}
+                    <small class="text-danger">
+                        {{ form.assignment_priority.errors }}
+                    </small>
+                  {% else %}
+                    <small class="text-dark">{{form.assignment_priority.help_text}}</small>
+                  {% endif %}
+              </div>
+
+              <div class="col-lg-12 col-md mb-3 form-control">
+                <label class="text-dark"><b>{{form.assignment_description.label}}</b></label>
+                  {{form.assignment_description}}
+                  <br>
+                  {% if form.errors %}
+                    <small class="text-danger">
+                        {{ form.assignment_description.errors }}
+                    </small>
+                  {% else %}
+                    <small class="text-dark">{{form.assignment_description.help_text}}</small>
+                  {% endif %}
+              </div>
+
+              <div class="col-lg-6 col-md mb-3">
+                <label class="text-dark"><b>{{form.file.label}}</b></label>
+                  {{form.file}}
+                  {% if form.errors %}
+                    <small class="text-danger">
+                        {{ form.file.errors }}
+                    </small>
+                  {% else %}
+                    <small class="text-dark">{{form.file.help_text}}</small>
+                  {% endif %}
+              </div>
+
+              <div class="col-lg-6 col-md mb-3">
+                <label class="text-dark"><b>{{form.language_used.label}}</b></label>
+                  {{form.language_used}}
+                  {% if form.errors %}
+                    <small class="text-danger">
+                        {{ form.language_used.errors }}
+                    </small>
+                  {% else %}
+                    <small class="text-dark">{{form.language_used.help_text}}</small>
+                  {% endif %}
+              </div>
+
+              <div class="col-lg-6 col-md mb-3">
+                <label class="text-dark"><b>{{form.contact_no.label}}</b></label>
+                  {{form.contact_no}}
+                  {% if form.errors %}
+                    <small class="text-danger">
+                        {{ form.contact_no.errors }}
+                    </small>
+                  {% else %}
+                    <small class="text-dark">{{form.contact_no.help_text}}</small>
+                  {% endif %}
+              </div>
+
+              <div class="col-lg-6 col-md mb-3">
+                <label class="text-dark"><b>{{form.date_up_to.label}}</b></label>
+                  {{form.date_up_to}}
+                  {% if form.errors %}
+                    <small class="text-danger">
+                        {{ form.date_up_to.errors }}
+                    </small>
+                  {% else %}
+                    <small class="text-dark">{{form.date_up_to.help_text}}</small>
+                  {% endif %}
+              </div>
+              
+              <div class="text-center d-grid mt-1">
+                <button type="submit" class="btn btn-primary rounded-pill pt-3 pb-3">
+                  submit
+                  <i class="fas fa-paper-plane"></i>
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+        <div class="col-12 col-lg-6 gradient shadow p-3">
+          <div class="cta-info w-100">
+            <h4 class="display-9 fw-bold">Rules and Regulation For Assignment Request</h4><br>
+            {{assignment.data.description | safe}}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+{% endblock %}

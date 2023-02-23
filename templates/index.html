@@ -108,7 +108,7 @@
       <!-- START THE CONTENT FOR THE INTRO  -->
       <div class="col-md-6 intros text-start">
         <h1 class="display-2">
-          <span class="display-2--intro">Hello!, I'm Sujit Khanal</span>
+          <span class="display-2--intro">Hello!, I'm {{my_detail.data.full_name}}</span>
           <span class="display-2--description lh-base" style="font-size:12">
             I am currently studing software engineering at Gandaki Collage Of Engineering and Science (GCES).<br><br>
             EAT(); SLEEP(); CODE(); REPEAT();
@@ -153,20 +153,21 @@
   </div>
 </section>
 
-<section class="page-content page-container" id="page-content">
+<section class="page-content page-container" id="project">
     <div class="padding">
         <div class="row container-fluid">
 <div class="col-lg-12 grid-margin stretch-card">
               <div class="card">
                 <div class="card-body">
+                  <div style="float: right;"><a href="/project/" class="badge bg-danger text-white mt-1 ms-1">View all</a></div>
+
                   <div class="row text-center">
                     <h1 class="display-6 fw-bold text-capitalize">Projects</h1>
                     <div class="heading-line"></div>
                   </div>
-                  <div style="float: right;"><a href="/project/" class="badge bg-danger text-white mt-1 ms-1">View all</a></div>
                   <div class="row">
                     {% for project in projects %}
-                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-3">
+                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-3 mt-3">
                       <a href="/project/detail/{{project.id}}/">
                         <div class="card h-100">
                           <div class="badge bg-danger text-white position-absolute mt-1 ms-1">{{project.project_type}}</div>
@@ -202,7 +203,7 @@
 <section id="contact" class="get-started">
   <div class="container">
     <div class="row text-center">
-      <h1 class="display-3 fw-bold text-capitalize">Get in Touch</h1>
+      <h1 class="display-4 fw-bold text-capitalize">Get in Touch</h1>
       <div class="heading-line"></div>
       <p class="lh-lg">
         If you have any query you can ask question by filling this form.
@@ -213,35 +214,34 @@
         <div class="cta-info w-100">
           <h4 class="display-4 fw-bold">My Contact</h4><br>
           <ul class="cta-info__list">
-            <li>Mail<i class="fas fa-envelope"></i>: developer.sujitkhanal@gmail.com</li>
-            <li>Github<i class="fab fa-github"></i>: https://github.com/DebugxFistey/</li>
-            <li>Viber<i class="fab fa-viber"></i>: +977 9842765535</li>
-            <li>Telegram<i class="fab fa-telegram"></i>: https://t.me/tijuslanahk</li>
-            <li>Discord<i class="fab fa-discord"></i>: tijus.lanahk#6979</li>
-            <li>Facebook<i class="fab fa-facebook"></i>: https://www.facebook.com/DebugxFistey</i></li>
+            <li>Mail<i class="fas fa-envelope"></i>: {{my_detail.data.mail}}</li>
+            <li>Github<i class="fab fa-github"></i>: {{my_detail.data.github_url}}</li>
+            <li>Whatsapp<i class="fab fa-whatsapp"></i>: {{my_detail.data.whatsapp}}</li>
+            <li>Youtube<i class="fab fa-youtube"></i>: {{my_detail.data.youtube_url}}</li>
+            <li>Facebook<i class="fab fa-facebook"></i>: {{my_detail.data.facebook_url}}</i></li>
           </ul>
         </div>
       </div>
       <div class="col-12 col-lg-6 bg-white shadow p-3">
         <div class="form w-100 pb-2">
           <h4 class="display-3--title mb-5">Fill the form</h4>
-          <form method="post" action="{% url 'contact:add-contact' %}" class="row">
+          <form method="post" action="{% url 'contact:contact' %}" class="row">
             {% csrf_token %}
             <div class="col-lg-6 col-md mb-3">
               <input type="text" placeholder="First Name" name="firstname" id="inputFirstName"
-                class="shadow form-control form-control-lg">
+                class="shadow form-control form-control-lg" required>
             </div>
             <div class="col-lg-6 col-md mb-3">
               <input type="text" placeholder="Last Name" name="lastname" id="inputLastName"
-                class="shadow form-control form-control-lg">
+                class="shadow form-control form-control-lg" required>
             </div>
             <div class="col-lg-12 mb-3">
               <input type="email" placeholder="Your email address" name="email" id="inputEmail"
-                class="shadow form-control form-control-lg">
+                class="shadow form-control form-control-lg" required>
             </div>
             <div class="col-lg-12 mb-3">
               <textarea name="message" placeholder="Write your message" name="message" id="message" rows="8"
-                class="shadow form-control form-control-lg"></textarea>
+                class="shadow form-control form-control-lg" required></textarea>
             </div>
             <div class="text-center d-grid mt-1">
               <button type="submit" class="btn btn-primary rounded-pill pt-3 pb-3">

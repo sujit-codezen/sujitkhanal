@@ -34,7 +34,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>DebugXFistey</title>
+    <title>{{my_detail.data.full_name}}</title>
     <link rel="stylesheet" href="{% static 'assets/css/style.css' %}">
     <link rel="stylesheet" href="{% static 'assets/css/fontawesome.css' %}">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
@@ -48,30 +48,11 @@
 <!-- ////////////////////////////////////////////////////////////////////////////////////////
                                START SECTION 1 - THE NAVBAR SECTION  
 /////////////////////////////////////////////////////////////////////////////////////////////-->
-<nav class="navbar navbar-expand-lg navbar-dark menu shadow fixed-top">
-    <div class="container">
-      <a class="navbar-brand" href="">
-        <h2>Debug<b>X</b>Fistey</h2>
-      </a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-        <ul class="navbar-nav">
-          <li class="nav-item"><a class="nav-link active" aria-current="page" href="/">Home</a></li>
-          <li class="nav-item"><a class="nav-link" href="#product">Product</a>
-          <li class="nav-item"><a class="nav-link" href="#contact">Contact</a>
-          </li>
-        </ul>
-        <button type="button" class="rounded-pill btn-rounded">
-          developer.sujitkhanal@gmail.com
-          <span>
-            <i class="fas fa-envelope"></i>
-          </span>
-        </button>
-      </div>
-    </div>
-  </nav>
+{% if title %}
+  {% include 'base/home_nav.html' %}
+{% else %}
+  {% include 'base/all_nav.html' %}
+{% endif %}
   <main>
     {% if messages %}
     {% for message in messages %}
@@ -79,8 +60,7 @@
       <div class="alert animated flipInX alert-{{ message.tags }} alert-dismissible">
         <strong><i class="fa fa-thumbs-up"></i>{% if message.tags == 'warning' %} Error! {% else %} Success! {% endif %}&nbsp;</strong>
         {{ message }}
-        <span class="close" data-dismiss="alert">
-          <i class="fa fa-times-circle"></i>
+        <span class="btn-close" data-bs-dismiss="alert">
         </span>
       </div>
     </div>
@@ -96,7 +76,7 @@
       <!-- CONTENT FOR THE MOBILE NUMBER  -->
       <div class="col-md-4 col-lg-4 contact-box pt-1 d-md-block d-lg-flex d-flex">
         <div class="contact-box__info">
-          <button type="button" class="rounded-pill btn-rounded">10sujitkhanal/
+          <button type="button" class="rounded-pill btn-rounded">DebugxFistey
             <span><i class="fab fa-github"></i></span>
           </button>
         </div>
@@ -126,12 +106,12 @@
     <div class="container">
       <div class="row py-4 text-center text-white">
         <div class="col-lg-6 col-md-6 mb-4 mb-md-0">
-          © Copyright 2022 sujit | Developed by Sujit Khanal 
+          © Copyright 2022 {{my_detail.data.nick_name}} | Developed by {{my_detail.data.full_name}}
         </div>
         <div class="col-lg-6 col-md-6">
-          <a href="https://www.facebook.com/DebugxFistey/"><i class="fab fa-facebook"></i></a>
-          <a href="https://github.com/DebugxFistey/" target="_blank"><i class="fab fa-github"></i></a>
-          <a href="https://t.me/tijuslanahk" target="_blank"><i class="fab fa-telegram"></i></a>
+          <a href="{{my_detail.data.facebook_url}}"><i class="fab fa-facebook"></i></a>
+          <a href="{{my_detail.data.github_url}}" target="_blank"><i class="fab fa-github"></i></a>
+          <a href="https://wa.me/{{my_detail.data.whatsapp}}" target="_blank"><i class="fab fa-whatsapp"></i></a>
         </div>
       </div>
     </div>
@@ -142,13 +122,6 @@
   <i class="fas fa-chevron-up"></i>
 </a>
 
-
-
-   <script>
-    setTimeout(() => {  
-  $('#pageMessages').fadeOut('fast');  
-}, 5000);
-    </script>
     <script src="{% static 'assets/vendors/js/glightbox.min.js' %}"></script>
     <script src="{% static 'assets/js/bootstrap.bundle.min.js' %}"></script>
 </body>
