@@ -42,7 +42,7 @@ INSTALLED_APPS = [
     'contact',
     'taggit',
     'projects',
-    'assignments',
+    # 'assignments',
     'settings',
 
     #third pary app
@@ -100,10 +100,10 @@ WSGI_APPLICATION = 'khanalsujit.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': "django.db.backends.postgresql",
-        'HOST': "167.235.9.123",
-        'NAME': "dadapakh_sujitdb",
-        'USER': "dadapakh_sujit",
-        'PASSWORD': "CG0Vt3;k]AC.",
+        'HOST': "100.42.187.204",
+        'NAME': "sujitdb1",
+        'USER': "sujitdb1",
+        'PASSWORD': "2i5D5Mzb5EeE",
         'PORT': "5432",
     }
 }

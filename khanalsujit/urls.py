@@ -8,7 +8,7 @@ url_patterns = [
     path('', include('portfolio.urls')),
     path('project/', include('projects.urls')),
     path('contact/', include('contact.urls')),
-    path('assignment/', include('assignments.urls')),
+    # path('assignment/', include('assignments.urls')),
     path('ckeditor/', include('ckeditor_uploader.urls')),
 ]
 
