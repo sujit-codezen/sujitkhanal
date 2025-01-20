@@ -100,7 +100,7 @@ WSGI_APPLICATION = 'khanalsujit.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': "django.db.backends.postgresql",
-        'HOST': "167.235.9.123:2082",
+        'HOST': "167.235.9.123",
         'NAME': "dadapakh_sujitdb",
         'USER': "dadapakh_sujit",
         'PASSWORD': "CG0Vt3;k]AC.",
