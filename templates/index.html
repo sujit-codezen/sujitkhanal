@@ -1,258 +1,504 @@
 {% extends 'base/base.html' %}
 {% load static %}
-{% load cloudinary %}
-{% block content %}
-<style>
-  .tcb-product-slider {
-    background: #333;
-    background-image: url(https://unsplash.it/1240/530?image=721);
-    background-size: cover;
-    background-repeat: no-repeat;
-    padding: 100px 0;
-  }
+{% block content %}    
+    
+    <!-- Hero Section Start -->
+    <section class="main-hero-area pt-150 pb-80 rel z-1">
+        <div class="container container-1620">
+            <div class="row align-items-center">
+                <div class="col-lg-4 col-sm-7">
+                    <div class="hero-content rmb-55 wow fadeInUp delay-0-2s">
+                        <span class="h2">Hello, i’m </span>
+                        <h1><b>{{my_detail.data.full_name}}</b> <span style="font-size:30px;">{{my_detail.data.profession}}</span></h1>
+                        {{my_detail.data.slogon | safe}}
+                        <div class="hero-btns">
+                            <a href="contact.html" class="theme-btn">Hire Me <i class="far fa-angle-right"></i></a>
+                            <a href="{% url 'download_cv' %}" download="cv_sujitkhanal.pdf" class="read-more">Download Resume <i class="far fa-angle-right"></i></a>
 
-  .tcb-product-slider .carousel-control {
-    width: 5%;
-  }
-
-  .tcb-product-item a {
-    color: #147196;
-  }
-
-  .tcb-product-item a:hover {
-    text-decoration: none;
-  }
-
-  .tcb-product-item .tcb-hline {
-    margin: 10px 0;
-    height: 1px;
-    background: #ccc;
-  }
-
-  @media all and (max-width: 768px) {
-    .tcb-product-item {
-      margin-bottom: 30px;
-    }
-  }
-
-  .tcb-product-photo {
-    text-align: center;
-    height: 180px;
-    background: #fff;
-  }
-
-  .tcb-product-photo img {
-    height: 100%;
-    display: inline-block;
-  }
-
-  .tcb-product-info {
-    background: #f0f0f0;
-    padding: 15px;
-  }
-
-  .tcb-product-title h4 {
-    margin-top: 0;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    overflow: hidden;
-  }
-
-  .tcb-product-rating {
-    color: #acacac;
-  }
-
-  .tcb-product-rating .active {
-    color: #FFB500;
-  }
-
-  .tcb-product-price {
-    color: firebrick;
-    font-size: 18px;
-  }
-
-
-
-  .details {
-    margin: 50px 0;
-  }
-
-  .details h1 {
-    font-size: 32px;
-    text-align: center;
-    margin-bottom: 3px;
-  }
-
-  .details .back-link {
-    text-align: center;
-  }
-
-  .details .back-link a {
-    display: inline-block;
-    margin: 20px 0;
-    padding: 15px 30px;
-    background: #333;
-    color: #fff;
-    border-radius: 24px;
-  }
-
-  .details .back-link a svg {
-    margin-right: 10px;
-    vertical-align: text-top;
-    display: inline-block;
-  }
-</style>
-<section id="home" class="intro-section">
-  <div class="container">
-    <div class="row align-items-center text-white">
-      <!-- START THE CONTENT FOR THE INTRO  -->
-      <div class="col-md-6 intros text-start">
-        <h1 class="display-2">
-          <span class="display-2--intro">Hello!, I'm {{my_detail.data.full_name}}</span>
-          <span class="display-2--description lh-base" style="font-size:12">
-            I am currently studing software engineering at Gandaki Collage Of Engineering and Science (GCES).<br><br>
-            EAT(); SLEEP(); CODE(); REPEAT();
-          </span>
-        </h1>
-        <a href="#contact" style="text-decoration: none;">
-          <button type="button" class="rounded-pill btn-rounded">Get in Touch
-            <span><i class="fas fa-arrow-right"></i></span>
-          </button>
-        </a>
-      </div>
-      <!-- START THE CONTENT FOR THE VIDEO -->
-      <div class="col-md-6 intros text-end">
-        <div class="video-box">
-          <img src="{% static 'images/coding.png' %}" alt="Coding Image" class="img-fluid">
-
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="get-started">
-  <div class="container">
-    <div class="row">
-      <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 services mt-4 text-start">
-        <div class="services__pic">
-          <img src="{% static 'images/web-development.png' %}" alt="web development" class="img-fluid">
-        </div>
-      </div>
-      <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 services mt-4">
-        <div class="services__content">
-          <div class="icon d-block fas fa-code"></div>
-          <h3 class="display-3--title mt-1">web development</h3>
-          <p class="lh-lg">
-            I love coding. I am a django (python) developer. I have built a project like e-commerce, management system
-            and many more.
-          </p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="page-content page-container" id="project">
-    <div class="padding">
-        <div class="row container-fluid">
-<div class="col-lg-12 grid-margin stretch-card">
-              <div class="card">
-                <div class="card-body">
-                  <div style="float: right;"><a href="/project/" class="badge bg-danger text-white mt-1 ms-1">View all</a></div>
-
-                  <div class="row text-center">
-                    <h1 class="display-6 fw-bold text-capitalize">Projects</h1>
-                    <div class="heading-line"></div>
-                  </div>
-                  <div class="row">
-                    {% for project in projects %}
-                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-3 mt-3">
-                      <a href="/project/detail/{{project.id}}/">
-                        <div class="card h-100">
-                          <div class="badge bg-danger text-white position-absolute mt-1 ms-1">{{project.project_type}}</div>
-                          <img class="card-img-top" src="{{project.image.url}}" alt="{{project.project_name}}" style="width: 100%; height: 200px;">
-                          <div class="card-body text-center">
-                            <a href="/project/detail/{{project.id}}/" class="h4 text-danger text-decoration-none">{{project.project_name}}</a>
-            
-                            <div class="product-price">
-                              <span class="price fw-bold ms-2">{% for tag in project.language_used.all %} <span class="badge bg-primary">{{tag}}</span> {% endfor %}</span>
-                            </div>
-                            <div class="product-price">
-                              <span class="price fw-bold ms-2">
-                                {% if project.github_url %}<a href="{{project.github_url}}" class="text-dark" target="_blank"><i class="fab fa-github"></i></a>{% endif %} 
-                                {% if project.youtube_url %}<a href="{{project.youtube_url}}" class="text-dark" target="_blank"><i class="fab fa-youtube"></i></a>{% endif %} 
-                                {% if project.project_url  %}<a href="{{project.project_url}}" class="text-dark" target="_blank"><i class="fas fa-globe"></i></a>{% endif %}
-                              </span>
-                            </div>
-                          </div>
-            
                         </div>
-                      </a>
                     </div>
-                    {% endfor %}
-                  </div>
                 </div>
-              </div>
+                <div class="col-lg-3 col-sm-5 order-lg-3">
+                    <div class="hero-counter-wrap ms-lg-auto rmb-55 wow fadeInUp delay-0-4s">
+                        <div class="counter-item counter-text-wrap">
+                            <span class="count-text" data-speed="3000" data-stop="{{my_detail.data.get_age}}">0</span>
+                            <span class="counter-title">Age</span>
+                        </div>
+                        <div class="counter-item counter-text-wrap">
+                            <span class="count-text plus" data-speed="3000" data-stop="{{my_detail.data.get_coding_started_at}}">0</span>
+                            <span class="counter-title">Years Of Experience</span>
+                        </div>
+                        <div class="counter-item counter-text-wrap">
+                            <span class="count-text plus" data-speed="3000" data-stop="{{my_detail.data.get_completed_projects}}">0</span>
+                            <span class="counter-title">Project Complete</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-5">
+                    <div class="author-image-part wow fadeIn delay-0-3s">
+                        <div class="bg-circle"></div>
+                        <img src="{{my_detail.data.display_photo.url}}" alt="Author">
+                        <div class="progress-shape">
+                            <img src="{% static 'assets/images/shapes/progress-shape.png' %}" alt="Progress">
+                        </div>
+                    </div>
+                </div>
             </div>
-            </div>
-              </div>
-            </section>
-
-
-<section id="contact" class="get-started">
-  <div class="container">
-    <div class="row text-center">
-      <h1 class="display-4 fw-bold text-capitalize">Get in Touch</h1>
-      <div class="heading-line"></div>
-      <p class="lh-lg">
-        If you have any query you can ask question by filling this form.
-      </p>
-    </div>
-    <div class="row text-white">
-      <div class="col-12 col-lg-6 gradient shadow p-3">
-        <div class="cta-info w-100">
-          <h4 class="display-4 fw-bold">My Contact</h4><br>
-          <ul class="cta-info__list">
-            <li>Mail<i class="fas fa-envelope"></i>: {{my_detail.data.mail}}</li>
-            <li>Github<i class="fab fa-github"></i>: {{my_detail.data.github_url}}</li>
-            <li>Whatsapp<i class="fab fa-whatsapp"></i>: {{my_detail.data.whatsapp}}</li>
-            <li>Youtube<i class="fab fa-youtube"></i>: {{my_detail.data.youtube_url}}</li>
-            <li>Facebook<i class="fab fa-facebook"></i>: {{my_detail.data.facebook_url}}</i></li>
-          </ul>
         </div>
-      </div>
-      <div class="col-12 col-lg-6 bg-white shadow p-3">
-        <div class="form w-100 pb-2">
-          <h4 class="display-3--title mb-5">Fill the form</h4>
-          <form method="post" action="{% url 'contact:contact' %}" class="row">
-            {% csrf_token %}
-            <div class="col-lg-6 col-md mb-3">
-              <input type="text" placeholder="First Name" name="firstname" id="inputFirstName"
-                class="shadow form-control form-control-lg" required>
-            </div>
-            <div class="col-lg-6 col-md mb-3">
-              <input type="text" placeholder="Last Name" name="lastname" id="inputLastName"
-                class="shadow form-control form-control-lg" required>
-            </div>
-            <div class="col-lg-12 mb-3">
-              <input type="email" placeholder="Your email address" name="email" id="inputEmail"
-                class="shadow form-control form-control-lg" required>
-            </div>
-            <div class="col-lg-12 mb-3">
-              <textarea name="message" placeholder="Write your message" name="message" id="message" rows="8"
-                class="shadow form-control form-control-lg" required></textarea>
-            </div>
-            <div class="text-center d-grid mt-1">
-              <button type="submit" class="btn btn-primary rounded-pill pt-3 pb-3">
-                submit
-                <i class="fas fa-paper-plane"></i>
-              </button>
-            </div>
-          </form>
+        <div class="bg-lines">
+            <span></span><span></span>
+            <span></span><span></span>
+            <span></span><span></span>
+            <span></span><span></span>
+            <span></span><span></span>
         </div>
-      </div>
+    </section>
+    <!-- Hero Section End -->
+    
+    
+    <!-- About Area start -->
+    <section class="about-area rel z-1">
+        <div class="for-bgc-black py-130 rpy-100">
+            <div class="container">
+                <div class="row gap-100 align-items-center">
+                    <div class="col-lg-7">
+                        <div class="about-content-part rel z-2 rmb-55">
+                            <div class="section-title mb-35 wow fadeInUp delay-0-2s">
+                                <span class="sub-title mb-15">About Me</span>
+                                <h2>Professional <span>{{my_detail.data.profession}}</span></h2>
+                                <p>{{my_detail.data.about_short}}</p>
+                            </div>
+                            <ul class="list-style-one two-column wow fadeInUp delay-0-2s">
+                                {% for know in knowledge %}
+                                    <li>{{know.title}}</li>
+                                {% endfor %}
+                            </ul>
+                            <div class="about-info-box mt-25 wow fadeInUp delay-0-2s">
+                                <div class="info-box-item">
+                                    <i class="far fa-envelope"></i>
+                                    <div class="content">
+                                        <span>Email Us</span><br>
+                                        <a href="mailto:{{my_detail.data.email}}">{{my_detail.data.email}}</a>
+                                    </div>
+                                </div>
+                                <div class="info-box-item">
+                                    <i class="far fa-phone"></i>
+                                    <div class="content">
+                                        <span>Make A Call</span><br>
+                                        <a href="callto:{{my_detail.data.country_code}}{{my_detail.data.contact_number}}">{{my_detail.data.country_code}}{{my_detail.data.contact_number}}</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-5">
+                        <div class="about-image-part wow fadeInUp delay-0-3s">
+                            <img src="{{my_detail.data.second_display_photo.url}}" alt="About Me">
+                            <div class="about-btn btn-one wow fadeInRight delay-0-4s">
+                                <img src="{% static 'assets/images/backend.jpg' %}" alt="Image">
+                                <h6>Experience Backend Developer</h6>
+                                <i class="fas fa-arrow-right"></i>
+                            </div>
+                            <div class="about-btn btn-two wow fadeInRight delay-0-5s">
+                                <img src="{% static 'assets/images/python.jpg' %}" alt="Image">
+                                <h6>Knowledge of Python</h6>
+                                <i class="fas fa-arrow-right"></i>
+                            </div>
+                            <div class="dot-shape">
+                                <img src="{% static 'assets/images/shapes/about-dot.png' %}" alt="Shape">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="bg-lines">
+            <span></span><span></span>
+            <span></span><span></span>
+            <span></span><span></span>
+            <span></span><span></span>
+            <span></span><span></span>
+        </div>
+    </section>
+    <!-- About Area end -->
+    
+    
+    <!-- Resume Area start -->
+    <section class="resume-area pt-50 rpt-100 rel z-1 mb-30">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3">
+                    <div class="big-icon mt-85 rmt-0 rmb-55 wow fadeInUp delay-0-2s">
+                        <img src="{% static 'assets/images/education.png' %}" style="width:90%">
+                    </div>
+                </div>
+                <div class="col-lg-9">
+                    <div class="row">
+                        <div class="col-xl-8 col-lg-9">
+                            <div class="section-title mb-60 wow fadeInUp delay-0-2s">
+                                <span class="sub-title mb-15">My Resume</span>
+                                <h2><span>Education</span> Timeline</h2>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="resume-items-wrap">
+                        <div class="row justify-content-between">
+                            {% for edu in education %}
+                            <div class="col-xl-5 col-md-6">
+                                <div class="resume-item wow fadeInUp delay-0-3s">
+                                    <div class="icon">
+                                        <i class="far fa-arrow-right"></i>
+                                    </div>
+                                    <div class="content">
+                                        <span class="years">{{edu.start_date}} - {% if edu.is_present_here %}Present{% else %} {{edu.end_date}}{% endif %}</span>
+                                        <h5>{{edu.school_name}}</h5>
+                                        <span class="company">{{edu.address}}, {{edu.state}}</span>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+
+                    
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-3">
+                    <div class="big-icon mt-85 rmt-0 rmb-55 wow fadeInUp delay-0-2s">
+                        <img src="{% static 'assets/images/timeline.png' %}" style="width:80%">
+                    </div>
+                </div>
+                <div class="col-lg-9">
+
+            <div class="row">
+                <div class="col-xl-8 col-lg-9">
+                    <div class="section-title mb-60 wow fadeInUp delay-0-2s mt-50">
+                        <h2><span>Experience</span> Timeline</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="resume-items-wrap">
+                <div class="row justify-content-between">
+                    {% for exp in experience %}
+                        <div class="col-xl-5 col-md-6">
+                            <div class="resume-item wow fadeInUp delay-0-3s">
+                                <div class="icon">
+                                    <i class="far fa-arrow-right"></i>
+                                </div>
+                                <div class="content">
+                                    <span class="years">{{exp.start_date}} - {% if exp.is_present_here %}Present{% else %} {{exp.end_date}}{% endif %}</span>
+                                    <h4>{{exp.position}}</h4>
+                                    <span class="company">{{exp.company_name}}</span>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
     </div>
-  </div>
-</section>
+        </div>
+        <div class="bg-lines">
+            <span></span><span></span>
+            <span></span><span></span>
+            <span></span><span></span>
+            <span></span><span></span>
+            <span></span><span></span>
+        </div>
+    </section>
+    <!-- Resume Area end -->
+    
+    
+    <!-- Skill Area start -->
+    <section class="skill-area rel z-1">
+        <div class="for-bgc-black pt-130 rpt-100 pb-100 rpb-70">
+            <div class="container">
+                <div class="row gap-100">
+                    <div class="col-lg-5">
+                        <div class="skill-content-part rel z-2 rmb-55 wow fadeInUp delay-0-2s">
+                            <div class="section-title mb-40">
+                                <span class="sub-title mb-15">My Skills</span>
+                                <h2>Let’s Explore My <span>Skills & Experience</span></h2>
+                                <p>
+                                    I specialize in backend development, web and mobile app development, and integrating third-party services. I’m passionate about exploring new technologies and ensuring secure, scalable solutions.
+                                </p>
+                            </div>
+                            <a href="about.html" class="theme-btn">Learn More <i class="far fa-angle-right"></i></a>
+                        </div>
+                    </div>
+                    <div class="col-lg-7">
+                        <div class="skill-items-wrap">
+                            <div class="row">
+                                {% for skill in skills %}
+                                <div class="col-xl-3 col-lg-4 col-md-3 col-sm-4 col-6">
+                                    <div class="skill-item wow fadeInUp delay-0-2s">
+                                        <img src="{{skill.logo.url}}" alt="Skill" style="width:60px;">
+                                        <h5>{{skill.skill_name}}</h5>
+                                        <span class="percent">{{skill.percentage}}%</span>
+                                    </div>
+                                </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="bg-lines">
+            <span></span><span></span>
+            <span></span><span></span>
+            <span></span><span></span>
+            <span></span><span></span>
+            <span></span><span></span>
+        </div>
+    </section>
+    <!-- Skill Area end -->    
+    
+    <!-- Testimonial Area start -->
+    <section class="testimonials-area rel z-1">
+        <div class=" py-130 rpy-100">
+            <div class="container">
+                <div class="row gap-90">
+                    <div class="col-lg-4">
+                        <div class="testimonials-content-part rel z-2 rmb-55 wow fadeInUp delay-0-2s">
+                            <div class="section-title mb-40">
+                                <span class="sub-title mb-15">Latest Projects</span>
+                                <h2>Explore My <span>Latest Work</span></h2>
+                                <p>Explore my latest projects where I’ve applied innovative solutions to real-world challenges. From e-commerce platforms to mobile apps, my work spans a variety of industries and technologies. Each project reflects my commitment to quality, user experience, and cutting-edge solutions. Dive into my portfolio to see how I transform ideas into functional, scalable, and impactful products</p>
+                            </div>
+                            <div class="slider-arrows">
+                                <button class="testimonial-prev"><i class="fal fa-arrow-left"></i></button>
+                                <button class="testimonial-next"><i class="fal fa-arrow-right"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-8">
+                        <div class="testimonials-wrap">
+                            {% for project in projects %}
+                            <div class="testimonial-item wow fadeInUp delay-0-3s">
+                                <div class="author">
+                                    <img src="{{project.image.url}}" alt="Author">
+                                </div>
+                                <div class="text">{{ project.project_description|truncatechars:200|safe }}</div>
+                                <div class="testi-des">
+                                    <h5>{{project.project_name}}</h5>
+                                    <span>{{project.project_type}}</span>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="bg-lines">
+            <span></span><span></span>
+            <span></span><span></span>
+            <span></span><span></span>
+            <span></span><span></span>
+            <span></span><span></span>
+        </div>
+    </section>
+    <!-- Testimonial Area end -->    
+    
+    
+    <!-- Blog Area start -->
+    <section class="blog-area rel z-1">
+        <div class="for-bgc-black pt-130 pb-100 rpt-100 rpb-70">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-xl-12">
+                        <div class="section-title text-center mb-60 wow fadeInUp delay-0-2s">
+                            <span class="sub-title mb-15">News & Blog</span>
+                            <h2>Latest News & <span>Blog</span></h2>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="blog-item wow fadeInUp delay-0-2s">
+                            <div class="image">
+                                <img src="{% static 'assets/images/blog/blog1.png' %}" alt="Blog">
+                            </div>
+                            <div class="content">
+                                <div class="blog-meta mb-35">
+                                    <a class="tag" href="blog.html">Design</a>
+                                    <a class="tag" href="blog.html">Figma</a>
+                                </div>
+                                <h5><a href="blog-details.html">Tips For Conductin See Usability Studies</a></h5>
+                                <hr>
+                                <div class="blog-meta mt-35">
+                                    <a class="date" href="#"><i class="far fa-calendar-alt"></i> September 25, 2023</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="blog-item wow fadeInUp delay-0-2s">
+                            <div class="image">
+                                <img src="{% static 'assets/images/blog/blog2.png' %}" alt="Blog">
+                            </div>
+                            <div class="content">
+                                <div class="blog-meta mb-35">
+                                    <a class="tag" href="blog.html">Design</a>
+                                    <a class="tag" href="blog.html">Figma</a>
+                                </div>
+                                <h5><a href="blog-details.html">Keyboard-Only Suppor Assistive Technology</a></h5>
+                                <hr>
+                                <div class="blog-meta mt-35">
+                                    <a class="date" href="#"><i class="far fa-calendar-alt"></i> September 25, 2023</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="bg-lines">
+            <span></span><span></span>
+            <span></span><span></span>
+            <span></span><span></span>
+            <span></span><span></span>
+            <span></span><span></span>
+        </div>
+    </section>
+    <!-- Blog Area end -->
+
+    <section class="contact-area pt-95 pb-130 rpt-70 rpb-100 rel z-1">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="contact-content-part pt-5 rpt-0 rmb-55 wow fadeInUp delay-0-2s">
+                        <div class="section-title mb-40">
+                            <span class="sub-title mb-15">Get In Touch</span>
+                            <h2>Let’s Talk For your <span>Next Projects</span></h2>
+                            <p>Sed ut perspiciatis unde omnin natus totam rem aperiam eaque inventore veritatis</p>
+                        </div>
+                        <ul class="list-style-two">
+                            <li>5+ Years Of Experience</li>
+                            <li>Professional Web Designer</li>
+                            <li>Mobile Apps Design</li>
+                            <li>Custom Design Support</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-8">
+                    <div class="contact-form contact-form-wrap form-style-one wow fadeInUp delay-0-4s">
+                        <form class="contactForm" name="contactForm" method="post" action="{% url 'contact:contact' %}">
+                            {% csrf_token %}
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="name">Full Name</label>
+                                        <input type="text" id="name" name="full_name" class="form-control" value="" placeholder="Your Name" required data-error="Please enter your Name">
+                                        <label for="name" class="for-icon"><i class="far fa-user"></i></label>
+                                        <div class="help-block with-errors"></div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="email">Email Address</label>
+                                        <input type="email" id="email" name="email" class="form-control" value="" placeholder="youremail@mail.com" required data-error="Please enter your Email">
+                                        <label for="email" class="for-icon"><i class="far fa-envelope"></i></label>
+                                        <div class="help-block with-errors"></div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="phone_number">Phone Number</label>
+                                        <input type="text" id="phone_number" name="phone_number" class="form-control" value="" placeholder="+880 (123) 456 88" required data-error="Please enter your Phone Number">
+                                        <label for="phone_number" class="for-icon"><i class="far fa-phone"></i></label>
+                                        <div class="help-block with-errors"></div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="subject">Subject</label>
+                                        <input type="text" id="subject" name="subject" class="form-control" value="" placeholder="Subject" required data-error="Please enter your Subject">
+                                        <label for="subject" class="for-icon"><i class="far fa-text"></i></label>
+                                        <div class="help-block with-errors"></div>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label for="message">Message</label>
+                                        <textarea name="message" id="message" class="form-control" rows="4" placeholder="write message" required data-error="Please enter your Message"></textarea>
+                                        <div class="help-block with-errors"></div>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="form-group mb-0">
+                                        <button type="submit" class="theme-btn">Send Us Message <i class="far fa-angle-right"></i></button>
+                                        <div id="msgSubmit" class="hidden"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="bg-lines">
+            <span></span><span></span>
+            <span></span><span></span>
+            <span></span><span></span>
+            <span></span><span></span>
+            <span></span><span></span>
+        </div>
+    </section>
+    
+    <!-- Client Log start -->
+    <div class="client-logo-area rel z-1 pt-130 rpt-100 pb-60">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-xl-12">
+                    <div class="section-title text-center pt-5 mb-65 wow fadeInUp delay-0-2s">
+                        <h6>I’ve <span>1253+ Global Clients</span> & lot’s of Project Complete</h6>
+                    </div>
+                </div>
+            </div>
+            <div class="client-logo-wrap">
+                <a class="client-logo-item wow fadeInUp delay-0-2s" href="contact.html">
+                    <img src="{% static 'assets/images/client-logos/client-logo1.png' %}" alt="Client Logo">
+                </a>
+                <a class="client-logo-item wow fadeInUp delay-0-3s" href="contact.html">
+                    <img src="{% static 'assets/images/client-logos/client-logo2.png' %}" alt="Client Logo">
+                </a>
+                <a class="client-logo-item wow fadeInUp delay-0-4s" href="contact.html">
+                    <img src="{% static 'assets/images/client-logos/client-logo3.png' %}" alt="Client Logo">
+                </a>
+                <a class="client-logo-item wow fadeInUp delay-0-5s" href="contact.html">
+                    <img src="{% static 'assets/images/client-logos/client-logo4.png' %}" alt="Client Logo">
+                </a>
+                <a class="client-logo-item wow fadeInUp delay-0-6s" href="contact.html">
+                    <img src="{% static 'assets/images/client-logos/client-logo5.png' %}" alt="Client Logo">
+                </a>
+                <a class="client-logo-item wow fadeInUp delay-0-2s" href="contact.html">
+                    <img src="{% static 'assets/images/client-logos/client-logo6.png' %}" alt="Client Logo">
+                </a>
+                <a class="client-logo-item wow fadeInUp delay-0-3s" href="contact.html">
+                    <img src="{% static 'assets/images/client-logos/client-logo7.png' %}" alt="Client Logo">
+                </a>
+                <a class="client-logo-item wow fadeInUp delay-0-4s" href="contact.html">
+                    <img src="{% static 'assets/images/client-logos/client-logo8.png' %}" alt="Client Logo">
+                </a>
+                <a class="client-logo-item wow fadeInUp delay-0-5s" href="contact.html">
+                    <img src="{% static 'assets/images/client-logos/client-logo9.png' %}" alt="Client Logo">
+                </a>
+                <a class="client-logo-item wow fadeInUp delay-0-6s" href="contact.html">
+                    <img src="{% static 'assets/images/client-logos/client-logo10.png' %}" alt="Client Logo">
+                </a>
+            </div>
+        </div>
+        <div class="bg-lines">
+            <span></span><span></span>
+            <span></span><span></span>
+            <span></span><span></span>
+            <span></span><span></span>
+            <span></span><span></span>
+        </div>
+    </div>
+    <!-- Client Log end -->
 {% endblock %}
+    

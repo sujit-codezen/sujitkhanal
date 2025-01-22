@@ -1,86 +1,134 @@
 {% extends 'base/base.html' %}
 {% block content %}
-<section id="contact" class="get-started">
-    <div class="container">
-      <div class="row text-center">
-        <h1 class="display-4 fw-bold text-capitalize">Get in Touch</h1>
-        <div class="heading-line"></div>
-        <p class="lh-lg">
-          If you have any query you can ask question by filling this form.
-        </p>
-      </div>
-      <div class="row text-white">
-        <div class="col-12 col-lg-6 gradient shadow p-3">
-          <div class="cta-info w-100">
-            <h4 class="display-4 fw-bold">My Contact</h4><br>
-            <ul class="cta-info__list">
-              <li>Mail<i class="fas fa-envelope"></i>: {{my_detail.data.mail}}</li>
-              <li>Github<i class="fab fa-github"></i>: {{my_detail.data.github_url}}</li>
-              <li>Whatsapp<i class="fab fa-whatsapp"></i>: {{my_detail.data.whatsapp}}</li>
-              <li>Youtube<i class="fab fa-youtube"></i>: {{my_detail.data.youtube_url}}</li>
-              <li>Facebook<i class="fab fa-facebook"></i>: {{my_detail.data.facebook_url}}</i></li>
-            </ul>
-          </div>
+        <!-- Page Banner Start -->
+        <section class="page-banner-area pt-150 rpt-140 pb-100 rpb-60 rel z-1 text-center">
+            <div class="container">
+                <div class="banner-inner text-white">
+                    <h1 class="page-title wow fadeInUp delay-0-2s">Contact Us</h1>
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb justify-content-center wow fadeInUp delay-0-4s">
+                            <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                            <li class="breadcrumb-item active">Contact Us</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+            <div class="bg-lines">
+               <span></span><span></span>
+               <span></span><span></span>
+               <span></span><span></span>
+               <span></span><span></span>
+               <span></span><span></span>
+            </div>
+        </section>
+        <!-- Page Banner End -->
+        
+        
+        <!-- Contact Page Area start -->
+        <section class="contact-page pt-20 pb-130 rpb-100 rel z-1">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-lg-4">
+                        <div class="contact-page-content rmb-55 wow fadeInUp delay-0-2s">
+                            <div class="section-title mb-30">
+                                <span class="sub-title mb-15">Get In Touch</span>
+                                <h2>Let’s Talk For your <span>Next Projects</span></h2>
+                            </div>
+                            <h6>Contact Info</h6>
+                            <div class="widget_contact_info mb-35">
+                                <ul>
+                                    <li><i class="far fa-map-marker-alt"></i> {{my_detail.data.address}},<br> {{my_detail.data.state}}, {{my_detail.data.country}}</li>
+                                    <li><i class="far fa-envelope"></i> <a href="mailto:{{my_detail.data.email}}">{{my_detail.data.email}}</a></li>
+                                    <li><i class="far fa-envelope"></i> <a href="mailto:{{my_detail.data.mail}}">{{my_detail.data.mail}}</a></li>
+                                    <li><i class="far fa-phone"></i> <a href="callto:{{my_detail.data.country_code}}{{my_detail.data.contact_number}}">{{my_detail.data.country_code}}{{my_detail.data.contact_number}}</a></li>
+                                </ul>
+                            </div>
+                            <h5>Follow Me</h5>
+                            <div class="social-style-one mt-10">
+                                <a href="{{my_detail.data.facebook_url}}"><i class="fab fa-facebook-f"></i></a>
+                                <a href="{{my_detail.data.github_url}}"><i class="fab fa-github"></i></a>
+                                <a href="{{my_detail.data.linkedin_url}}"><i class="fab fa-linkedin-in"></i></a>
+                                <a href="{{my_detail.data.instagram_url}}"><i class="fab fa-instagram"></i></a>
+                                <a href="{{my_detail.data.youtube_channel}}"><i class="fab fa-youtube"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-8">
+                        <div class="contact-form contact-form-wrap form-style-one wow fadeInUp delay-0-4s">
+                            <form class="contactForm" name="contactForm" method="post" action="{% url 'contact:contact' %}">
+                                {% csrf_token %}
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="name">Full Name</label>
+                                            <input type="text" id="name" name="full_name" class="form-control" value="" placeholder="Your Name" required data-error="Please enter your Name">
+                                            <label for="name" class="for-icon"><i class="far fa-user"></i></label>
+                                            <div class="help-block with-errors"></div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="email">Email Address</label>
+                                            <input type="email" id="email" name="email" class="form-control" value="" placeholder="youremail@mail.com" required data-error="Please enter your Email">
+                                            <label for="email" class="for-icon"><i class="far fa-envelope"></i></label>
+                                            <div class="help-block with-errors"></div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="phone_number">Phone Number</label>
+                                            <input type="text" id="phone_number" name="phone_number" class="form-control" value="" placeholder="+880 (123) 456 88" required data-error="Please enter your Phone Number">
+                                            <label for="phone_number" class="for-icon"><i class="far fa-phone"></i></label>
+                                            <div class="help-block with-errors"></div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="subject">Subject</label>
+                                            <input type="text" id="subject" name="subject" class="form-control" value="" placeholder="Subject" required data-error="Please enter your Subject">
+                                            <label for="subject" class="for-icon"><i class="far fa-text"></i></label>
+                                            <div class="help-block with-errors"></div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label for="message">Message</label>
+                                            <textarea name="message" id="message" class="form-control" rows="4" placeholder="write message" required data-error="Please enter your Message"></textarea>
+                                            <div class="help-block with-errors"></div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="form-group mb-0">
+                                            <button type="submit" class="theme-btn">Send Us Message <i class="far fa-angle-right"></i></button>
+                                            <div id="msgSubmit" class="hidden"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="bg-lines">
+               <span></span><span></span>
+               <span></span><span></span>
+               <span></span><span></span>
+               <span></span><span></span>
+               <span></span><span></span>
+            </div>
+        </section>
+        <!-- Contact Page Area end -->
+        
+        
+        <!-- Location Map Area Start -->
+        <div class="contact-page-map pb-120 rpb-90 wow fadeInUp delay-0-2s">
+            <div class="container">
+                <div class="our-location">
+                    <iframe src="{{my_detail.data.google_map_url}}" style="border:0; width: 100%;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
+            </div>
         </div>
-        <div class="col-12 col-lg-6 bg-white shadow p-3">
-          <div class="form w-100 pb-2">
-            <h4 class="display-3--title mb-5">Fill the form</h4>
-            <form method="post" action="{% url 'contact:contact' %}" class="row">
-              {% csrf_token %}
-              <div class="col-lg-6 col-md mb-3">
-                <input type="text" placeholder="First Name" name="firstname" id="inputFirstName"
-                  class="shadow form-control form-control-lg" required>
-                  {% if form.errors %}
-                    <small class="text-danger">
-                        {{ form.firstname.errors }}
-                    </small>
-                  {% else %}
-                    <small class="text-dark">{{form.firstname.help_text}}</small>
-                  {% endif %}
-              </div>
-              <div class="col-lg-6 col-md mb-3">
-                <input type="text" placeholder="Last Name" name="lastname" id="inputLastName"
-                  class="shadow form-control form-control-lg" required>
-                  {% if form.errors %}
-                    <small class="text-danger">
-                        {{ form.lastname.errors }}
-                    </small>
-                  {% else %}
-                    <small class="text-dark">{{form.lastname.help_text}}</small>
-                  {% endif %}
-              </div>
-              <div class="col-lg-12 mb-3">
-                <input type="email" placeholder="Your email address" name="email" id="inputEmail"
-                  class="shadow form-control form-control-lg" required>
-                  {% if form.errors %}
-                    <small class="text-danger">
-                        {{ form.email.errors }}
-                    </small>
-                  {% else %}
-                    <small class="text-dark">{{form.email.help_text}}</small>
-                  {% endif %}
-              </div>
-              <div class="col-lg-12 mb-3">
-                <textarea name="message" placeholder="Write your message" name="message" id="message" rows="8"
-                  class="shadow form-control form-control-lg" required></textarea>
-                  {% if form.errors %}
-                    <small class="text-danger">
-                        {{ form.message.errors }}
-                    </small>
-                  {% else %}
-                    <small class="text-dark">{{form.message.help_text}}</small>
-                  {% endif %}
-              </div>
-              <div class="text-center d-grid mt-1">
-                <button type="submit" class="btn btn-primary rounded-pill pt-3 pb-3">
-                  submit
-                  <i class="fas fa-paper-plane"></i>
-                </button>
-              </div>
-            </form>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+        <!-- Location Map Area End -->
 {% endblock %}
+        
+      

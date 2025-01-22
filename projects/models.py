@@ -2,6 +2,7 @@ from django.db import models
 from taggit.managers import TaggableManager
 from core.utils import TimeStampedModel
 from ckeditor.fields import RichTextField
+from django.utils.text import slugify
 
 # Create your models here.
 class Project(TimeStampedModel):
@@ -24,6 +25,18 @@ class Project(TimeStampedModel):
     project_url = models.CharField(max_length=255, blank=True, null=True)
     github_url = models.CharField(max_length=255, blank=True, null=True)
     video_url = models.CharField(max_length=255, blank=True, null=True)
+    slug = models.SlugField(max_length=100, unique=True, null=True, blank=True)
+    is_completed = models.BooleanField(default=False)
+    
+    def __str__(self):
+        return self.project_name
+    
+    def save(self, *args, **kwargs):
+        self.slug = slugify(f"{self.project_name}-{self.id}")
+        super(Project, self).save(*args, **kwargs)
+        
+    def get_absolute_url(self):
+        return f"/project/{self.slug}/"
 
 
 # class ProjectImage(TimeStampedModel):

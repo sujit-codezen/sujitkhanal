@@ -1,158 +1,248 @@
 {% load static %}
-{% load cloudinary %}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zxx">
 <head>
-  <style>
-    #pageMessages {
-      position: fixed;
-      top: 70px;
-      width: 400px;
-      right:0px;
-      float: right;
-    }
-    .align-right {
-      -webkit-box-pack: end;
-      justify-content: flex-end;
-      float: right;
-    }
-    .alert {
-      position: relative;
-    }
-
-    .alert .close {
-      position: absolute;
-      top: 5px;
-      right: 5px;
-      font-size: 1em;
-    }
-
-    .alert .fa {
-      margin-right:.3em;
-    }
-  </style>
-    <meta charset="UTF-8">
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>{{my_detail.data.full_name}}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Title -->
+    <title>Sujit Khanal || {{page_title}}</title>
+    <!-- Favicon Icon -->
+    <link rel="shortcut icon" href="{% static 'assets/images/favicon.ico' %}" type="image/x-icon">
+    
+    <!-- Flaticon -->
+    <link rel="stylesheet" href="{% static 'assets/css/flaticon.min.css' %}">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="{% static 'assets/css/fontawesome-5.14.0.min.css' %}">
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="{% static 'assets/css/bootstrap.min.css' %}">
+    <!-- Magnific Popup -->
+    <link rel="stylesheet" href="{% static 'assets/css/magnific-popup.min.css' %}">
+    <!-- Nice Select -->
+    <link rel="stylesheet" href="{% static 'assets/css/nice-select.min.css' %}">
+    <!-- Animate -->
+    <link rel="stylesheet" href="{% static 'assets/css/animate.min.css' %}">
+    <!-- Slick -->
+    <link rel="stylesheet" href="{% static 'assets/css/slick.min.css' %}">
+    <!-- Main Style -->
     <link rel="stylesheet" href="{% static 'assets/css/style.css' %}">
-    <link rel="stylesheet" href="{% static 'assets/css/fontawesome.css' %}">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css" />
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.bundle.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/mcstudios/glightbox/dist/js/glightbox.min.js"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
 </head>
-<body>
-<!-- ////////////////////////////////////////////////////////////////////////////////////////
-                               START SECTION 1 - THE NAVBAR SECTION  
-/////////////////////////////////////////////////////////////////////////////////////////////-->
-{% if title %}
-  {% include 'base/home_nav.html' %}
-{% else %}
-  {% include 'base/all_nav.html' %}
-{% endif %}
-  <main>
-    {% if messages %}
-    {% for message in messages %}
-    <div id="pageMessages" class="pageMessages col-lg-4 col-sm-10 col-xs-10 col-md-6 align-right" style="z-index: 999;">
-      <div class="alert animated flipInX alert-{{ message.tags }} alert-dismissible">
-        <strong><i class="fa fa-thumbs-up"></i>{% if message.tags == 'warning' %} Error! {% else %} Success! {% endif %}&nbsp;</strong>
-        {{ message }}
-        <span class="btn-close" data-bs-dismiss="alert">
-        </span>
-      </div>
+<body class="home-one">
+    <div class="page-wrapper">
+
+        <!-- Preloader -->
+        <div class="preloader"></div>
+
+        <!-- main header -->
+        <header class="main-header menu-absolute">
+            <!--Header-Upper-->
+            <div class="header-upper">
+                <div class="container container-1620 clearfix">
+
+                    <div class="header-inner rel d-flex align-items-center">
+                        <div class="logo-outer">
+                            <div class="logo"><a href="/"><img src="{% static 'assets/images/logos/logo.png' %}" alt="Logo" title="Logo"></a></div>
+                        </div>
+
+                        <div class="nav-outer clearfix mx-auto">
+                            <!-- Main Menu -->
+                            <nav class="main-menu navbar-expand-lg">
+                                <div class="navbar-header">
+                                   <div class="mobile-logo my-15">
+                                       <a href="index.html">
+                                            <img src="{% static 'assets/images/logos/logo.png' %}" alt="Logo" title="Logo">
+                                       </a>
+                                   </div>
+                                   
+                                    <!-- Toggle Button -->
+                                    <button type="button" class="navbar-toggle me-4" data-bs-toggle="collapse" data-bs-target=".navbar-collapse">
+                                        <span class="icon-bar"></span>
+                                        <span class="icon-bar"></span>
+                                        <span class="icon-bar"></span>
+                                    </button>
+                                </div>
+
+                                <div class="navbar-collapse collapse clearfix">
+                                    <ul class="navigation clearfix">
+                                        <li class="dropdown"><a href="/">Home</a>
+                                        </li>
+                                        <li><a href="about.html">about</a></li>
+                                        <li><a href="services.html">services</a></li>
+                                        <li><a href="/projects">projects</a></li>
+                                        <li><a href="#">blog</a></li>
+                                        <li><a href="contact.html">Contact</a></li>
+                                    </ul>
+                                </div>
+
+                            </nav>
+                            <!-- Main Menu End-->
+                        </div>
+                        
+                        <!-- Menu Button -->
+                        <div class="menu-btns">
+                            <!-- menu sidbar -->
+                            <div class="menu-sidebar">
+                                <button>
+                                    <img src="{% static 'assets/images/shapes/phone.png' %}" alt="Toggler">
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--End Header Upper-->
+        </header>
+       
+       
+        <!--Form Back Drop-->
+        <div class="form-back-drop"></div>
+        <section class="hidden-bar">
+            <div class="inner-box text-center">
+                <div class="cross-icon"><span class="fa fa-times"></span></div>
+                <div class="title">
+                    <h4>Get Appointment</h4>
+                </div>
+    
+                <!--Appointment Form-->
+                <div class="appointment-form">
+                    <form method="post" action="contact.html">
+                        <div class="form-group">
+                            <input type="text" name="text" value="" placeholder="Name" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="email" name="email" value="" placeholder="Email Address" required>
+                        </div>
+                        <div class="form-group">
+                            <textarea placeholder="Message" rows="5"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" class="theme-btn">Submit now</button>
+                        </div>
+                    </form>
+                </div>
+    
+                <!--Social Icons-->
+                <div class="social-style-one">
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-pinterest-p"></i></a>
+                </div>
+            </div>
+        </section>
+        
+        {% block content %}
+        {% endblock %}
+        
+        
+        <!-- footer area start -->
+        <footer class="main-footer rel z-1">
+            <div class="footer-top-wrap bgc-black pt-100 pb-75">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-2 col-md-12">
+                            <div class="footer-widget widget_logo wow fadeInUp delay-0-2s">
+                                <div class="footer-logo">
+                                    <a href="index.html"><img src="{% static 'assets/images/logos/logo.png' %}" alt="Logo"></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-7 col-md-7">
+                            <div class="footer-widget widget_nav_menu wow fadeInUp delay-0-4s">
+                                <h6 class="footer-title">Quick Link</h6>
+                                <ul>
+                                    <li><a href="services.html">About</a></li>
+                                    <li><a href="projects.html">Projects</a></li>
+                                    <li><a href="services.html#pricing">Blog</a></li>
+                                    <li><a href="about.html#faqs">Faqs</a></li>
+                                    <li><a href="contact.html">Contact</a></li>
+                                </ul>
+                            </div>
+                            <div class="footer-widget widget_newsletter wow fadeInUp delay-0-4s">
+                                <form action="#">
+                                    <label for="email-address"><i class="far fa-envelope"></i></label>
+                                    <input id="email-address" type="email" placeholder="Email Address" required>
+                                    <button>Sign Up <i class="far fa-angle-right"></i></button>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-5">
+                            <div class="footer-widget widget_contact_info wow fadeInUp delay-0-6s">
+                                <h6 class="footer-title">Address</h6>
+                                <ul>
+                                    <li><i class="far fa-map-marker-alt"></i> {{my_detail.data.address}},<br> {{my_detail.data.state}}, {{my_detail.data.country}}</li>
+                                    <li><i class="far fa-envelope"></i> <a href="mailto:{{my_detail.data.email}}">{{my_detail.data.email}}</a></li>
+                                    <li><i class="far fa-envelope"></i> <a href="mailto:{{my_detail.data.mail}}">{{my_detail.data.mail}}</a></li>
+                                    <li><i class="far fa-phone"></i> <a href="callto:{{my_detail.data.country_code}}{{my_detail.data.contact_number}}">{{my_detail.data.country_code}}{{my_detail.data.contact_number}}</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom pt-20 pb-5 rpt-25">
+                <div class="container">
+                   <div class="row">
+                       <div class="col-lg-6">
+                            <div class="copyright-text">
+                                <p>Copyright @2025, <a href="/">{{my_detail.data.full_name}}</a> All Rights Reserved</p>
+                            </div>
+                       </div>
+                       <div class="col-lg-6 text-lg-end">
+                           <ul class="footer-bottom-nav">
+                               <li><a href="{{my_detail.data.facebook_url}}"><i class="fab fa-facebook-f"></i> Facebook</a></li>
+                               <li><a href="{{my_detail.data.github_url}}"><i class="fab fa-github"> Github</i></a></li>
+                               <li><a href="{{my_detail.data.linkedin_url}}"><i class="fab fa-linkedin-in"></i> Linkedin</a></li>
+                               <li><a href="{{my_detail.data.instagram_url}}"><i class="fab fa-instagram"></i> Instagram</a></li>
+                               <li><a href="{{my_detail.data.youtube_channel}}"><i class="fab fa-youtube"></i> Youtube</a></li>
+                           </ul>
+                       </div>
+                   </div>
+                   <!-- Scroll Top Button -->
+                    <button class="scroll-top scroll-to-target" data-target="html"><span class="fas fa-angle-double-up"></span></button>
+                </div>
+                <div class="bg-lines">
+                   <span></span><span></span>
+                   <span></span><span></span>
+                   <span></span><span></span>
+                   <span></span><span></span>
+                   <span></span><span></span>
+                </div>
+            </div>
+        </footer>
+        <!-- footer area end -->
+
     </div>
-    {% endfor %}
-    {% endif %}
-  </main>
-{% block content %}
-{% endblock %}
+    <!--End pagewrapper-->
+   
+    
+    <!-- Jquery -->
+    <script src="{% static 'assets/js/jquery-3.6.0.min.js' %}"></script>
+    <!-- Bootstrap -->
+    <script src="{% static 'assets/js/bootstrap.min.js' %}"></script>
+    <!-- Appear Js -->
+    <script src="{% static 'assets/js/appear.min.js' %}"></script>
+    <!-- Slick -->
+    <script src="{% static 'assets/js/slick.min.js' %}"></script>
+    <!-- Nice Select -->
+    <script src="{% static 'assets/js/jquery.nice-select.min.js' %}"></script>
+    <!-- Image Loader -->
+    <script src="{% static 'assets/js/imagesloaded.pkgd.min.js' %}"></script>
+    <!-- Isotope -->
+    <script src="{% static 'assets/js/isotope.pkgd.min.js' %}"></script>
+    <!--  WOW Animation -->
+    <script src="{% static 'assets/js/wow.min.js' %}"></script>
+    <!-- Custom script -->
+    <script src="{% static 'assets/js/script.js' %}"></script>
+    
+    <!-- For Contact Form -->
+    <script src="{% static 'assets/js/jquery.ajaxchimp.min.js' %}"></script>
+    <script src="{% static 'assets/js/form-validator.min.js' %}"></script>
+    <script src="{% static 'assets/js/contact-form-script.js' %}"></script>
 
-<footer class="footer">
-  <div class="container">
-    <div class="row">
-      <!-- CONTENT FOR THE MOBILE NUMBER  -->
-      <div class="col-md-4 col-lg-4 contact-box pt-1 d-md-block d-lg-flex d-flex">
-        <div class="contact-box__info">
-          <button type="button" class="rounded-pill btn-rounded">DebugxFistey
-            <span><i class="fab fa-github"></i></span>
-          </button>
-        </div>
-      </div>  
-      <!-- CONTENT FOR EMAIL  -->
-      <div class="col-md-4 col-lg-4 contact-box pt-1 d-md-block d-lg-flex d-flex">
-
-        <div class="contact-box__info">
-          <button type="button" class="rounded-pill btn-rounded">khanalsujit.com.np
-            <span><i class="fas fa-code"></i></span>
-          </button>
-        </div>
-      </div>
-      <!-- CONTENT FOR LOCATION  -->
-      <div class="col-md-4 col-lg-4 contact-box pt-1 d-md-block d-lg-flex d-flex">
-        <div class="contact-box__info">
-          <button type="button" class="rounded-pill btn-rounded">Pokhara, Nepal
-            <span><i class="fas fa-map"></i></span>
-          </button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- START THE SOCIAL MEDIA CONTENT  -->
-  <div class="footer-sm" style="background-color: #212121;">
-    <div class="container">
-      <div class="row py-4 text-center text-white">
-        <div class="col-lg-6 col-md-6 mb-4 mb-md-0">
-          © Copyright 2022 {{my_detail.data.nick_name}} | Developed by {{my_detail.data.full_name}}
-        </div>
-        <div class="col-lg-6 col-md-6">
-          <a href="{{my_detail.data.facebook_url}}"><i class="fab fa-facebook"></i></a>
-          <a href="{{my_detail.data.github_url}}" target="_blank"><i class="fab fa-github"></i></a>
-          <a href="https://wa.me/{{my_detail.data.whatsapp}}" target="_blank"><i class="fab fa-whatsapp"></i></a>
-        </div>
-      </div>
-    </div>
-  </div>
-</footer>
-
-<a href="#" class="shadow btn-primary rounded-circle back-to-top">
-  <i class="fas fa-chevron-up"></i>
-</a>
-<!-- Messenger Chat plugin Code -->
-<div id="fb-root"></div>
-
-<!-- Your Chat plugin code -->
-<div id="fb-customer-chat" class="fb-customerchat">
-</div>
-
-<script>
-  var chatbox = document.getElementById('fb-customer-chat');
-  chatbox.setAttribute("page_id", "114305568254324");
-  chatbox.setAttribute("attribution", "biz_inbox");
-</script>
-
-<!-- Your SDK code -->
-<script>
-  window.fbAsyncInit = function() {
-    FB.init({
-      xfbml            : true,
-      version          : 'v16.0'
-    });
-  };
-
-  (function(d, s, id) {
-    var js, fjs = d.getElementsByTagName(s)[0];
-    if (d.getElementById(id)) return;
-    js = d.createElement(s); js.id = id;
-    js.src = 'https://connect.facebook.net/en_US/sdk/xfbml.customerchat.js';
-    fjs.parentNode.insertBefore(js, fjs);
-  }(document, 'script', 'facebook-jssdk'));
-</script>
-
-    <script src="{% static 'assets/vendors/js/glightbox.min.js' %}"></script>
-    <script src="{% static 'assets/js/bootstrap.bundle.min.js' %}"></script>
 </body>
 </html>

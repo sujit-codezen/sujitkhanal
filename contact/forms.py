@@ -11,19 +11,23 @@ class ContactForm(forms.ModelForm):
         super().__init__(*args, **kwargs)
         # self.fields["price"].required = False
 
-    firstname = forms.CharField(
-        label='First Name',
-        widget=forms.TextInput(attrs={'class': 'shadow form-control', 'placeholder': 'First name'}),
-    )
-
-    lastname = forms.CharField(
-        label='Last Name',
-        widget=forms.TextInput(attrs={'class': 'shadow form-control', 'placeholder': 'Last Name'}),
+    full_name = forms.CharField(
+        label='Full Name',
+        widget=forms.TextInput(attrs={'class': 'shadow form-control', 'placeholder': 'Full name'}),
     )
 
     email = forms.CharField(
         label='Email',
         widget=forms.TextInput(attrs={'class': 'shadow form-control', 'placeholder': 'Email'}),
+    )
+    
+    subject = forms.CharField(
+        label='Subject',
+        widget=forms.TextInput(attrs={'class': 'shadow form-control', 'placeholder': 'Subject'}),
+    )
+    phone_number = forms.CharField(
+        label='Phone Number',
+        widget=forms.TextInput(attrs={'class': 'shadow form-control', 'placeholder': 'Phone Number'}),
     )
     message = forms.CharField(
         label='Write a message to send',
@@ -34,9 +38,10 @@ class ContactForm(forms.ModelForm):
     class Meta:
         model = Contact
         fields = (
-            'firstname',
-            'lastname',
+            'full_name',
             'email',
+            'subject',
+            'phone_number',
             'message',
         )
 
