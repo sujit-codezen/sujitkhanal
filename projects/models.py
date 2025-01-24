@@ -5,6 +5,13 @@ from ckeditor.fields import RichTextField
 from django.utils.text import slugify
 
 # Create your models here.
+
+class ProgrammingLanguage(TimeStampedModel):
+    name = models.CharField(max_length=50)
+    
+    def __str__(self):
+        return self.name
+    
 class Project(TimeStampedModel):
     PROJECT_TYPE_CHOICES = (
         ("Android App", "Android App"),
@@ -12,15 +19,19 @@ class Project(TimeStampedModel):
         ("Web App", "Web App"),
         ("IOS App", "IOS App"),
         ("Terminal Code", "Terminal Code"),
+        ("Script", "Script"),
+        ("API", "API"),
     )
     project_name = models.CharField(max_length=50)
+    sub_project_title = models.CharField(max_length=50, null=True)
+    project_short_description = models.CharField(max_length=500, null=True)
     project_description = RichTextField()
     project_type = models.CharField(
         max_length = 20,
         choices = PROJECT_TYPE_CHOICES,
         default = 'Web App'
     )
-    language_used = TaggableManager()
+    language_used = models.ManyToManyField(ProgrammingLanguage)
     image = models.ImageField(default="projects/image/default.jpg", upload_to="projects/image")
     project_url = models.CharField(max_length=255, blank=True, null=True)
     github_url = models.CharField(max_length=255, blank=True, null=True)
@@ -39,6 +50,6 @@ class Project(TimeStampedModel):
         return f"/project/{self.slug}/"
 
 
-# class ProjectImage(TimeStampedModel):
-#     project = models.ForeignKey(Project, on_delete=models.CASCADE, related_name='project_image')
-#     image = models.ImageField(upload_to='projects/image')
+class ProjectImage(TimeStampedModel):
+    project = models.ForeignKey(Project, on_delete=models.CASCADE, related_name='project_image')
+    image = models.ImageField(upload_to='projects/image')

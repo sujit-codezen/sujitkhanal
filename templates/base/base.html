@@ -70,11 +70,10 @@
                                     <ul class="navigation clearfix">
                                         <li class="dropdown"><a href="/">Home</a>
                                         </li>
-                                        <li><a href="about.html">about</a></li>
-                                        <li><a href="services.html">services</a></li>
-                                        <li><a href="/projects">projects</a></li>
-                                        <li><a href="#">blog</a></li>
-                                        <li><a href="contact.html">Contact</a></li>
+                                        <li><a href="{% if page_title == 'Home' %}#about{% else %}/#about{% endif %}">about</a></li>
+                                        <li><a href="/project/">projects</a></li>
+                                        <li><a href="/blogs/">blog</a></li>
+                                        <li><a href="/contact/form/">Contact</a></li>
                                     </ul>
                                 </div>
 
@@ -109,28 +108,56 @@
     
                 <!--Appointment Form-->
                 <div class="appointment-form">
-                    <form method="post" action="contact.html">
-                        <div class="form-group">
-                            <input type="text" name="text" value="" placeholder="Name" required>
-                        </div>
-                        <div class="form-group">
-                            <input type="email" name="email" value="" placeholder="Email Address" required>
-                        </div>
-                        <div class="form-group">
-                            <textarea placeholder="Message" rows="5"></textarea>
-                        </div>
-                        <div class="form-group">
-                            <button type="submit" class="theme-btn">Submit now</button>
+                    <form class="contactForm" name="contactForm" method="post" action="{% url 'contact:contact' %}">
+                        {% csrf_token %}
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <input type="text" id="name" name="full_name" class="form-control" value="" placeholder="Your Name" required data-error="Please enter your Name">
+                                    <div class="help-block with-errors"></div>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <input type="email" id="email" name="email" class="form-control" value="" placeholder="youremail@mail.com" required data-error="Please enter your Email">
+                                    <div class="help-block with-errors"></div>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <input type="text" id="phone_number" name="phone_number" class="form-control" value="" placeholder="+880 (123) 456 88" required data-error="Please enter your Phone Number">
+                                    <div class="help-block with-errors"></div>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <input type="text" id="subject" name="subject" class="form-control" value="" placeholder="Subject" required data-error="Please enter your Subject">
+                                    <div class="help-block with-errors"></div>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <textarea name="message" id="message" class="form-control" rows="4" placeholder="write message" required data-error="Please enter your Message"></textarea>
+                                    <div class="help-block with-errors"></div>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group mb-0">
+                                    <button type="submit" class="theme-btn">Send Us Message <i class="far fa-angle-right"></i></button>
+                                    <div id="msgSubmit" class="hidden"></div>
+                                </div>
+                            </div>
                         </div>
                     </form>
                 </div>
     
                 <!--Social Icons-->
                 <div class="social-style-one">
-                    <a href="#"><i class="fab fa-twitter"></i></a>
-                    <a href="#"><i class="fab fa-facebook-f"></i></a>
-                    <a href="#"><i class="fab fa-instagram"></i></a>
-                    <a href="#"><i class="fab fa-pinterest-p"></i></a>
+                    <a href="{{my_detail.data.facebook_url}}"><i class="fab fa-facebook-f"></i></a>
+                    <a href="{{my_detail.data.github_url}}"><i class="fab fa-github"></i></a>
+                    <a href="{{my_detail.data.linkedin_url}}"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="{{my_detail.data.instagram_url}}"><i class="fab fa-instagram"></i></a>
+                    <a href="{{my_detail.data.youtube_channel}}"><i class="fab fa-youtube"></i></a>
                 </div>
             </div>
         </section>
@@ -155,11 +182,12 @@
                             <div class="footer-widget widget_nav_menu wow fadeInUp delay-0-4s">
                                 <h6 class="footer-title">Quick Link</h6>
                                 <ul>
-                                    <li><a href="services.html">About</a></li>
-                                    <li><a href="projects.html">Projects</a></li>
-                                    <li><a href="services.html#pricing">Blog</a></li>
-                                    <li><a href="about.html#faqs">Faqs</a></li>
-                                    <li><a href="contact.html">Contact</a></li>
+                                    <li class="dropdown"><a href="/">Home</a>
+                                    </li>
+                                    <li><a href="{% if page_title == 'Home' %}#about{% else %}/#about{% endif %}">About</a></li>
+                                    <li><a href="/project/">Projects</a></li>
+                                    <li><a href="/blogs/">Blogs</a></li>
+                                    <li><a href="/contact/form/">Contact</a></li>
                                 </ul>
                             </div>
                             <div class="footer-widget widget_newsletter wow fadeInUp delay-0-4s">

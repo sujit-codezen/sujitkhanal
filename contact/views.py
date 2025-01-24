@@ -15,14 +15,16 @@ class ContactFormView(View):
     template_name = 'contacts/contact.html'
 
     def get(self, request, *args, **kwargs):
+        page_title = "Contact Us"
         form = self.form_class(initial=self.initial)
-        return render(request, self.template_name, {'form': form})
+        return render(request, self.template_name, {'form': form, 'page_title': page_title})
 
     def post(self, request, *args, **kwargs):
+        page_title = "Contact Us"
         form = self.form_class(request.POST, request.FILES)
         if form.is_valid():
             form.save()
             messages.success(self.request, "Message Sent Successfully. We will contact you soon...")
             return HttpResponseRedirect('/contact/form/')
 
-        return render(request, self.template_name, {'form': form})
+        return render(request, self.template_name, {'form': form, 'page_title': page_title})

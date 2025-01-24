@@ -1,0 +1,161 @@
+{% extends 'base/base.html' %}
+{% block content %}
+    <!-- Page Banner Start -->
+    <section class="page-banner-area pt-200 rpt-140 pb-100 rpb-60 rel z-1 text-center">
+        <div class="container">
+            <div class="banner-inner text-white">
+                <h1 class="page-title wow fadeInUp delay-0-2s">{{project.project_name}}</h1>
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb justify-content-center wow fadeInUp delay-0-4s">
+                        <li class="breadcrumb-item"><a href="/">Home</a></li>
+                        <li class="breadcrumb-item active">{{project.project_name}}</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+        <div class="bg-lines">
+            <span></span><span></span>
+            <span></span><span></span>
+            <span></span><span></span>
+            <span></span><span></span>
+            <span></span><span></span>
+        </div>
+    </section>
+    <!-- Page Banner End -->
+    
+    
+    <!-- ProjectDetails Area start -->
+    <section class="projects-details-area pt-40 pb-130 rpb-100 rel z-1">
+        <div class="container">
+            <div class="projects-details-image mb-50 wow fadeInUp delay-0-2s">
+                <img src="{{project.image.url}}" alt="{{project.project_name}}">
+            </div>
+            <div class="row gap-120">
+                <div class="col-lg-8">
+                    <div class="project-details-content wow fadeInUp delay-0-2s">
+                        <h3>{{project.sub_project_title}}</h3>
+                        <p class="big-letter">{{project.project_type | first}} {{project.project_short_description}}</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 wow fadeInUp delay-0-4s">
+                    <div class="project-details-info rmb-55">
+                        <div class="pd-info-item">
+                            <span>Category</span>
+                            <h5>{{project.project_type}}</h5>
+                        </div>
+                        {% if project.client %}
+                        <div class="pd-info-item">
+                            <span>Clients</span>
+                            <h5>{{project.client}}</h5>
+                        </div>
+                        {% endif %}
+                        {% if project.project_url %}
+                        <div class="pd-info-item">
+                            <span>Project</span>
+                            <h5><a href="{{project.project_url}}">Demo</a></h5>
+                        </div>
+                        {% endif %}
+                        {% if project.video_url %}
+                        <div class="pd-info-item">
+                            <span>Video Demo</span>
+                            <h5><a href="{{project.video_url}}">Watch</a></h5>
+                        </div>
+                        {% endif %}
+                        {% if project.github_url %}
+                        <div class="pd-info-item">
+                            <span>Source Code</span>
+                            <h5><a href="{{project.github_url}}">View</a></h5>
+                        </div>
+                        {% endif %}
+                        <div class="pd-info-item">
+                            <span>Published</span>
+                            <h5>{{project.created.date}}</h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row pb-15">
+                {% for pi in project_image %}
+                <div class="col-lg-4 col-sm-6">
+                    <div class="image mb-30 wow fadeInUp delay-0-2s">
+                        <img src="{{pi.image}}" alt="Project Middle">
+                    </div>
+                </div>
+                {% endfor %}
+                
+            </div>
+            <div class="project-bottom-content mb-50 wow fadeInUp delay-0-2s">
+                <h3 class="title mb-25">Project Summery</h3>
+                <p>{{project.project_description | safe}}</p>
+            </div>
+            <div class="tag-share py-30 wow fadeInUp delay-0-2s">
+                <div class="item">
+                    <b>Tags</b>
+                    <div class="tag-coulds">
+                        {% for language in project.language_used.all %}
+                            <a href="#">{{language.name}}</a>
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="item">
+                    <b>Share</b>
+                    <div class="social-style-one">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="bg-lines">
+            <span></span><span></span>
+            <span></span><span></span>
+            <span></span><span></span>
+            <span></span><span></span>
+            <span></span><span></span>
+        </div>
+    </section>
+    <!-- Project Details Area end -->
+    
+    {% if related_project %}
+    <!-- Related Projects Area start -->
+    <section class="related-projects-area pb-70 rpb-40 rel z-1">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-xl-12">
+                    <div class="section-title text-center mb-60 wow fadeInUp delay-0-2s">
+                        <h2>Related Projects</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                {% for rp in related_project %}
+                <div class="col-xl-4 col-md-6">
+                    <div class="project-item style-two wow fadeInUp delay-0-2s">
+                        <div class="project-image before-after-none">
+                            <img src="{{rp.image.url}}" alt="Project">
+                        </div>
+                        <div class="project-content">
+                            <span class="sub-title">{{rp.project_type}}</span>
+                            <h4><a href="/project/detail/{{rp.id}}">{{rp.project_name}}</a></h4>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="bg-lines">
+            <span></span><span></span>
+            <span></span><span></span>
+            <span></span><span></span>
+            <span></span><span></span>
+            <span></span><span></span>
+        </div>
+    </section>
+    {% endif %}
+    <!-- Related Projects Area end -->
+
+{% endblock %}
+        
+      

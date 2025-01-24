@@ -1,13 +1,15 @@
 from django.contrib import admin
 
-from .models import Project
+from .models import Project, ProjectImage, ProgrammingLanguage
 
-# class ProjectImageInline(admin.TabularInline):
-#     model = ProjectImage
-#     fields = (
-#             'image',
-#         )
-#     can_delete = True
+admin.site.register(ProgrammingLanguage)
+
+class ProjectImageInline(admin.TabularInline):
+    model = ProjectImage
+    fields = (
+            'image',
+        )
+    can_delete = True
 
 @admin.register(Project)
 class ProjectAdmin(admin.ModelAdmin):
@@ -17,4 +19,4 @@ class ProjectAdmin(admin.ModelAdmin):
     exclude = ('created','modified',)
 
     
-    # inlines = [ProjectImageInline]
+    inlines = [ProjectImageInline]

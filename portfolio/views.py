@@ -3,6 +3,7 @@ from projects.models import Project
 from settings.models import MyDetail, Knowledge, Education, Experience, Skill
 import requests
 from django.http import HttpResponse
+from blogs.models import Post
 
 def index(request):
     projects = Project.objects.all().order_by('-created')[:4]
@@ -10,6 +11,7 @@ def index(request):
     education = Education.objects.all()
     experience = Experience.objects.all()
     skills = Skill.objects.all()
+    posts = Post.objects.filter(status='published').order_by('-created_at')[:4]
     page_title = "Home"
     context = {
         'projects':projects,
@@ -17,7 +19,8 @@ def index(request):
         'knowledge': knowledge,
         'education': education,
         'experience': experience,
-        'skills': skills
+        'skills': skills,
+        'posts':posts,
     }
 
     return render(request, 'index.html', context)

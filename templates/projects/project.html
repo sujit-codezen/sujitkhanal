@@ -1,0 +1,153 @@
+{% extends 'base/base.html' %}
+{% block content %}
+    <!-- Page Banner Start -->
+    <section class="page-banner-area pt-200 rpt-140 pb-100 rpb-60 rel z-1 text-center">
+        <div class="container">
+            <div class="banner-inner text-white">
+                <h1 class="page-title wow fadeInUp delay-0-2s">All Projects</h1>
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb justify-content-center wow fadeInUp delay-0-4s">
+                        <li class="breadcrumb-item"><a href="/">Home</a></li>
+                        <li class="breadcrumb-item active">Projects</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+        <div class="bg-lines">
+            <span></span><span></span>
+            <span></span><span></span>
+            <span></span><span></span>
+            <span></span><span></span>
+            <span></span><span></span>
+        </div>
+    </section>
+    <!-- Page Banner End -->
+    
+    
+    <!-- Projects Area start -->
+    <section class="blog-standard-area pb-70 rpb-40 pb-130 rpb-100 rel z-1">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8">
+                    <div class="blog-standard-wrap">
+                        <div class="row">
+                            {% for proj in projects %}
+                            <div class="col-md-6 item">
+                                <div class="blog-item style-two wow fadeInUp delay-0-2s">
+                                    <div class="image">
+                                        <a href="/project/detail/{{proj.id}}/">
+                                            <img src="{{proj.image.url}}" alt="{{proj.project_name}}" style="width:100%; height:300px;">
+                                        </a>
+                                    </div>
+                                    <div class="content">
+                                        <div class="blog-meta mb-20">
+                                            {% for lu in proj.language_used.all %}
+                                                <a class="tag" href="#">{{lu.name}}</a>
+                                            {% endfor %}
+                                        </div>
+                                        <h5><a href="/project/detail/{{proj.id}}/">{{proj.project_name}}</a></h5>
+                                        <hr>
+                                        <div class="blog-meta mb-5">
+                                            <a class="date" href="#"><i class="far fa-calendar-alt"></i> {{proj.created.date}}</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+                            <div class="col-md-6 item offset-md-6">
+                                <div class="pagination">
+                                    <span class="step-links">
+                                        {% if projects.has_previous %}
+                                            <a href="?page=1">&laquo; first</a>
+                                            <a href="?page={{ projects.previous_page_number }}">previous</a>
+                                        {% endif %}
+                                
+                                        <span class="current">
+                                            Page {{ projects.number }} of {{ projects.paginator.num_pages }}.
+                                        </span>
+                                
+                                        {% if projects.has_next %}
+                                            <a href="?page={{ projects.next_page_number }}">next</a>
+                                            <a href="?page={{ projects.paginator.num_pages }}">last &raquo;</a>
+                                        {% endif %}
+                                    </span>
+                                </div>
+                                <div class="news-more-btn text-center mt-35 wow fadeInUp delay-0-2s">
+                                    <a href="blog.html" class="theme-btn">View More Projects <i class="far fa-angle-right"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="main-sidebar rmt-65">
+                        <div class="widget widget-search wow fadeInUp delay-0-2s">
+                            <h4 class="widget-title">Search</h4>
+                            <form action="" method="get" class="default-search-form">
+                                <input type="text" placeholder="Keywords" name="q" required>
+                                <button type="submit" class="searchbutton far fa-search"></button>
+                            </form>
+                        </div>
+                        <div class="widget widget-category wow fadeInUp delay-0-4s">
+                            <h4 class="widget-title">Project Types</h4>
+                            <ul>
+                                <li><i class="far fa-angle-right"></i> <a href="/project/?types=Web App">Web App</a></li>
+                                <li><i class="far fa-angle-right"></i> <a href="/project/?types=Desktop App">Desktop App</a></li>
+                                <li><i class="far fa-angle-right"></i> <a href="/project/?types=Android App">Android App</a></li>
+                                <li><i class="far fa-angle-right"></i> <a href="/project/?types=IOS App">IOS App</a></li>
+                                <li><i class="far fa-angle-right"></i> <a href="/project/?types=Terminal Code">Terminal Code</a></li>
+                                <li><i class="far fa-angle-right"></i> <a href="/project/?types=Script">Script</a></li>
+                                <li><i class="far fa-angle-right"></i> <a href="/project/?types=API">API</a></li>
+                            </ul>
+                        </div>
+                        {% if latest_project %}
+                        <div class="widget widget-recent-news wow fadeInUp delay-0-2s">
+                            <h4 class="widget-title">Latest Projects</h4>
+                            <ul>
+                                {% for lp in latest_project %}
+                                <li>
+                                    <div class="image">
+                                        <img src="{{lp.image.url}}" alt="{{lp.project_name}}">
+                                    </div>
+                                    <div class="content">
+                                        <div class="blog-meta mb-5">
+                                            <a class="date" href="#"><i class="far fa-calendar-alt"></i> {{lp.created.date}}</a>
+                                        </div>
+                                        <h5><a href="/project/detail/{{lp.id}}">{{lp.project_name}}</a></h5>
+                                    </div>
+                                </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                        {% endif %}
+                        <div class="widget widget-tag-cloud wow fadeInUp delay-0-2s">
+                            <h4 class="widget-title">Popular Tags</h4>
+                            <div class="tag-coulds">
+                                {% for lan in language %}
+                                    <a href="/project/?tag={{lan.name}}">{{lan.name}}</a>
+                                {% endfor %}
+                            </div>
+                        </div>
+                        <div class="widget widget-cta wow fadeInUp delay-0-2s">
+                            <div class="cta-widget" style="background-image: url(assets/images/widgets/widget-cta.jpg);">
+                                <span class="sub-title">Get A Quote</span>
+                                <h4>Looking For Creative Web Designer</h4>
+                                <a href="contact.html" class="theme-btn">Hire Me <i class="far fa-angle-right"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="bg-lines">
+           <span></span><span></span>
+           <span></span><span></span>
+           <span></span><span></span>
+           <span></span><span></span>
+           <span></span><span></span>
+        </div>
+    </section>
+    <!-- Projects Area end -->
+{% endblock %}
+        
+      
