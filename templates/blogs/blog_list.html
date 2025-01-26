@@ -1,0 +1,89 @@
+{% extends 'base/base.html' %}
+{% block content %}
+    <!-- Page Banner Start -->
+    <section class="page-banner-area pt-200 rpt-140 pb-100 rpb-60 rel z-1 text-center">
+        <div class="container">
+            <div class="banner-inner text-white">
+                <h1 class="page-title wow fadeInUp delay-0-2s"> Blog List</h1>
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb justify-content-center wow fadeInUp delay-0-4s">
+                        <li class="breadcrumb-item"><a href="/">Home</a></li>
+                        <li class="breadcrumb-item active"> Blog</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+        <div class="bg-lines">
+            <span></span><span></span>
+            <span></span><span></span>
+            <span></span><span></span>
+            <span></span><span></span>
+            <span></span><span></span>
+        </div>
+    </section>
+    <!-- Page Banner End -->
+    
+    
+    <!-- Blog Standard Area start -->
+    <section class="blog-standard-area pb-70 rpb-40 pb-130 rpb-100 rel z-1">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8">
+                    <div class="blog-standard-wrap">
+                        <div class="row">
+                            {% for blog in posts %}
+                            <div class="col-md-6 item">
+                                <div class="blog-item style-two wow fadeInUp delay-0-2s">
+                                    <div class="image">
+                                        <img src="{{blog.image.url}}" alt="Blog Standard">
+                                    </div>
+                                    <div class="content">
+                                        <div class="blog-meta mb-20">
+                                            {% for tag in blog.tags.all %}
+                                                <a class="tag" href="#">{{tag.name}}</a>
+                                            {% endfor %}
+                                        </div>
+                                        <h5><a href="/blogs/{{blog.slug}}">{{blog.title}}</a></h5>
+                                        <hr>
+                                        <div class="blog-meta mb-5">
+                                            <a class="date" href="#"><i class="far fa-calendar-alt"></i> {{blog.published_at}}</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+                            <div class="col-md-6 item offset-md-6">
+                                    {% if posts.has_other_pages %}
+                                                {% if posts.has_previous %}
+
+                                                   
+                                                        <a href="?page={{ posts.previous_page_number }}{% if category %}&category={{ category }}{% endif %}{% if q %}&q={{ q }}{% endif %}{% if tags_filter %}&tags={{ tags_filter }}{% endif %}" class="theme-btn btn-sm"><i class="far fa-angle-left"></i>&nbsp; Previous</a>
+                                                  
+                                                {% endif %}
+
+                                                <span class="current">
+                                                    Page {{ posts.number }} of {{ posts.paginator.num_pages }}.&nbsp;
+                                                </span>
+
+                                                {% if posts.has_next %}
+                                                    <a href="?page={{ posts.next_page_number }}{% if category %}&category={{ category }}{% endif %}{% if q %}&q={{ q }}{% endif %}{% if tags_filter %}&tags={{ tags_filter }}{% endif %}" class="theme-btn btn-sm">Next <i class="far fa-angle-right"></i></a>
+                                                
+                                                {% endif %}
+                                    {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% include 'blogs/blog_sidebar.html' %}
+            </div>
+        </div>
+        <div class="bg-lines">
+            <span></span><span></span>
+            <span></span><span></span>
+            <span></span><span></span>
+            <span></span><span></span>
+            <span></span><span></span>
+        </div>
+    </section>
+    <!-- Blog Standard Area end -->
+{% endblock %}

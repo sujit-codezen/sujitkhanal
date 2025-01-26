@@ -1,0 +1,73 @@
+<div class="col-lg-4">
+    <div class="main-sidebar rmt-65">
+        <div class="widget widget-search wow fadeInUp delay-0-2s">
+            <h4 class="widget-title">Search</h4>
+            <form action="" class="default-search-form" method="get">
+                <input type="text" placeholder="Keywords" required name="q">
+                <button type="submit" class="searchbutton far fa-search"></button>
+            </form>
+        </div>
+        <div class="widget widget-category wow fadeInUp delay-0-4s">
+            <h4 class="widget-title">Category</h4>
+            <ul>
+                {% for cat in categories %}
+                <li><i class="far fa-angle-right"></i> <a href="/blogs/list/?cat={{cat.name}}">{{cat.category_name}}</a></li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="widget widget-recent-news wow fadeInUp delay-0-2s">
+            <h4 class="widget-title">Latest News</h4>
+            <ul>
+                <li>
+                    <div class="image">
+                        <img src="assets/images/widgets/news1.jpg" alt="News">
+                    </div>
+                    <div class="content">
+                        <div class="blog-meta mb-5">
+                            <a class="date" href="#"><i class="far fa-calendar-alt"></i> Sep 25, 2023</a>
+                        </div>
+                        <h5><a href="blog-details.html">Tips For Conducting Studie</a></h5>
+                    </div>
+                </li>
+                <li>
+                    <div class="image">
+                        <img src="assets/images/widgets/news2.jpg" alt="News">
+                    </div>
+                    <div class="content">
+                        <div class="blog-meta mb-5">
+                            <a class="date" href="#"><i class="far fa-calendar-alt"></i> Sep 25, 2023</a>
+                        </div>
+                        <h5><a href="blog-details.html">Usability With Participants</a></h5>
+                    </div>
+                </li>
+                <li>
+                    <div class="image">
+                        <img src="assets/images/widgets/news3.jpg" alt="News">
+                    </div>
+                    <div class="content">
+                        <div class="blog-meta mb-5">
+                            <a class="date" href="#"><i class="far fa-calendar-alt"></i> Sep 25, 2023</a>
+                        </div>
+                        <h5><a href="blog-details.html">Online Environment Work</a></h5>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div class="widget widget-tag-cloud wow fadeInUp delay-0-2s">
+            <h4 class="widget-title">Popular Tags</h4>
+            <div class="tag-coulds">
+                {% for tag in tags %}
+                <a href="/blogs/list/?tags={{tag.name}}">{{tag.name}}</a>
+                {% endfor %}
+                
+            </div>
+        </div>
+        <div class="widget widget-cta wow fadeInUp delay-0-2s">
+            <div class="cta-widget" style="background-image: url(assets/images/widgets/widget-cta.jpg);">
+                <span class="sub-title">Get A Quote</span>
+                <h4>Looking For Creative Web Designer</h4>
+                <a href="contact.html" class="theme-btn">Hire Me <i class="far fa-angle-right"></i></a>
+            </div>
+        </div>
+    </div>
+</div>

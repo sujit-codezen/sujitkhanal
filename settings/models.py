@@ -15,7 +15,7 @@ class Assignment(SingletonModel):
 class MyDetail(SingletonModel):
     full_name = models.CharField(max_length=100)
     nick_name = models.CharField(max_length=100, null=True)
-    logo = models.ImageField(default="image/default.jpg", upload_to="image")
+    logo = models.FileField(default="image/default.jpg", upload_to="image")
     dob = models.DateField(null=True)
     contact_number = models.CharField(max_length=100,null=True)
     email = models.CharField(max_length=100,null=True)

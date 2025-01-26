@@ -1,14 +1,14 @@
 from django.contrib import admin
-from .models import Post, Category, Tag, Comment
+from .models import Post, Category, Tag, Comment, PostImage
 
+class PostImageInline(admin.TabularInline):
+    model = PostImage
+    
 class PostAdmin(admin.ModelAdmin):
-    list_display = ('title', 'author', 'category', 'status', 'created_at')
+    list_display = ('title', 'author','status', 'created_at')
     prepopulated_fields = {'slug': ('title',)}  # Automatically generate slug from title
-
-class CategoryAdmin(admin.ModelAdmin):
-    prepopulated_fields = {'slug': ('name',)}  # Automatically generate slug from name
+    inlines = [PostImageInline]
 
 admin.site.register(Post, PostAdmin)
-admin.site.register(Category, CategoryAdmin)
 admin.site.register(Tag)
 admin.site.register(Comment)

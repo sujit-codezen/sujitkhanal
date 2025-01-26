@@ -1,0 +1,183 @@
+{% extends 'base/base.html' %}
+{% block content %}
+    <!-- Page Banner Start -->
+    <section class="page-banner-area pt-200 rpt-140 pb-100 rpb-60 rel z-1 text-center">
+        <div class="container">
+            <div class="banner-inner text-white">
+                <h3 class="page-title wow fadeInUp delay-0-2s"> {{post.title}}</h3>
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb justify-content-center wow fadeInUp delay-0-4s">
+                        <li class="breadcrumb-item"><a href="/">Home</a></li>
+                        <li class="breadcrumb-item active"> {{post.title}}</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+        <div class="bg-lines">
+            <span></span><span></span>
+            <span></span><span></span>
+            <span></span><span></span>
+            <span></span><span></span>
+            <span></span><span></span>
+        </div>
+    </section>
+    <!-- Page Banner End -->
+    
+    
+    <!-- Blog Details Area start -->
+    <section class="blog-details-area pb-70 rpb-40 pb-130 rpb-100 rel z-1">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8">
+                    <div class="blog-details-wrap">
+                        <div class="content mt-35">
+                            <div class="blog-meta mb-30 wow fadeInUp delay-0-2s">
+                                {% for cat in post.category.all %}
+                                <a class="tag" href="#">{{cat.category_name}}</a>
+                                {% endfor %}
+                            </div>
+                            <div class="author-date-share mb-40 wow fadeInUp delay-0-4s">
+                                <div class="author">
+                                    <img src="https://www.iconpacks.net/icons/2/free-user-icon-3297-thumb.png" style="width:100px" alt="Author">
+                                </div>
+                                <div class="text">
+                                    <span>Author By</span>
+                                    <h5>{{post.author}}</h5>
+                                </div>
+                                <div class="text">
+                                    <span>Published</span>
+                                    <h5>{{post.published_at}}</h5>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="image mb-35 wow fadeInUp delay-0-5s">
+                            <img src="{{post.image.url}}" alt="Blog Details">
+                        </div>
+                        <div class="content wow fadeInUp delay-0-2s">
+                            <p class="big-letter">{{post.short_description}}</p>
+                        </div>
+                        <div class="row gap-20">
+                            {% for img in post.images.all %}
+                            <div class="col-md-6">
+                                <div class="image mb-20 wow fadeInUp delay-0-4s">
+                                    <img src="{{img.image.url}}" alt="Blog Middle">
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                        <div class="content mt-30 wow fadeInUp delay-0-2s">
+                            {{post.content | safe}}
+                            <div class="tag-share mt-45 py-30 wow fadeInUp delay-0-2s">
+                                <div class="item">
+                                    <b>Tags</b>
+                                    <div class="tag-coulds">
+                                        {% for tag in post.tags.all %}
+                                        <a href="#">{{tag.name}}</a>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                                
+                            </div>
+                        </div>
+                        <div class="content">
+                            <div class="mt-2"><h3>Related Blogs</h3></div>
+                            <div class="next-prev-post pt-50 pb-20 wow fadeInUp delay-0-2s">
+                                {% for rp in related_posts %}
+                                <div class="post-item">
+                                    <div class="image">
+                                        <img src="{{rp.image.url}}" alt="Post">
+                                    </div>
+                                    <div class="post-content">
+                                        <span class="date">
+                                            <i class="far fa-calendar-alt"></i>
+                                            <a href="#">{{rp.published_at}}</a>
+                                        </span>
+                                        <h6><a href="blog-details.html">{{rp.title}}</a></h6>
+                                    </div>
+                                </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                        {% comment %} <div class="content mt-65">
+                            <h3 class="comment-title">Comments</h3>
+                            <div class="comment-body wow fadeInUp delay-0-2s">
+                                <div class="author-thumb">
+                                    <img src="assets/images/blog/comment-author1.jpg" alt="Author">
+                                </div>
+                                <div class="content">
+                                    <ul class="blog-meta">
+                                        <li>
+                                            <h6>William L. Jackson</h6>
+                                        </li>
+                                        <li>
+                                            <a href="#">May 25, 2023</a>
+                                        </li>
+                                    </ul>
+                                    <p>Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse molestiae consequatur qui dolorem eum fugiat voluptas</p>
+                                    <a class="read-more" href="#">Reply <i class="far fa-angle-right"></i></a>
+                                </div>
+                            </div>
+                            <div class="comment-body comment-child wow fadeInUp delay-0-2s">
+                                <div class="author-thumb">
+                                    <img src="assets/images/blog/comment-author2.jpg" alt="Author">
+                                </div>
+                                <div class="content">
+                                    <ul class="blog-meta">
+                                        <li>
+                                            <h6>James M. Stovall</h6>
+                                        </li>
+                                        <li>
+                                            <a href="#">May 25, 2023</a>
+                                        </li>
+                                    </ul>
+                                    <p>At vero eoset accusamus dignissimos ducimus blanditiis sapiente praesentium voluptatum deleniti atque</p>
+                                    <a class="read-more" href="#">Reply <i class="far fa-angle-right"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="content">
+                            <form id="comment-form" class="comment-form form-style-one pt-65 pb-55 mt-55 wow fadeInUp delay-0-2s" name="comment-form" action="#" method="post">
+                                <h5>Leave a Reply</h5>
+                                <div class="row mt-30">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <input type="text" id="full-name" name="full-name" class="form-control" value="" placeholder="Full Name" required="">
+                                            <label for="full-name" class="for-icon"><i class="far fa-user"></i></label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <input type="email" id="email-address" name="email-address" class="form-control" value="" placeholder="Email Address" required="">
+                                            <label for="email-address" class="for-icon"><i class="far fa-envelope"></i></label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label for="message">Message</label>
+                                            <textarea name="message" id="message" class="form-control" rows="4" placeholder="write message" required=""></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="form-group mb-0">
+                                            <button type="submit" class="theme-btn">Leave A Reply <i class="far fa-angle-right"></i></button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div> {% endcomment %}
+                    </div>
+                </div>
+                {% include 'blogs/blog_sidebar.html' %}
+            </div>
+        </div>
+        <div class="bg-lines">
+            <span></span><span></span>
+            <span></span><span></span>
+            <span></span><span></span>
+            <span></span><span></span>
+            <span></span><span></span>
+        </div>
+    </section>
+    <!-- Blog Details Area end -->
+        
+{% endblock %}
