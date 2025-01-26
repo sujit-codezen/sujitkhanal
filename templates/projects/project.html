@@ -42,7 +42,7 @@
                                     <div class="content">
                                         <div class="blog-meta mb-20">
                                             {% for lu in proj.language_used.all %}
-                                                <a class="tag" href="#">{{lu.name}}</a>
+                                                <a class="tag mt-2" href="#">{{lu.name}}</a>
                                             {% endfor %}
                                         </div>
                                         <h5><a href="/project/detail/{{proj.id}}/">{{proj.project_name}}</a></h5>
